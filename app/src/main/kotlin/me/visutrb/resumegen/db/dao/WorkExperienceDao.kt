@@ -7,23 +7,23 @@ import me.visutrb.resumegen.entity.WorkExperience
 interface WorkExperienceDao {
 
     @Query("SELECT * FROM WorkExperience")
-    fun findAll(): List<WorkExperience>
+    suspend fun findAll(): List<WorkExperience>
 
     @Query("SELECT * FROM WorkExperience WHERE resumeId = :resumeId")
-    fun findAllByResumeId(resumeId: Int): List<WorkExperience>
+    suspend fun findAllByResumeId(resumeId: Int): List<WorkExperience>
 
     @Query("SELECT * FROM WorkExperience WHERE id = :id")
-    fun findById(id: Int): WorkExperience
+    suspend fun findById(id: Int): WorkExperience
 
     @Insert
-    fun insertAll(vararg workExperiences: WorkExperience)
+    suspend fun insertAll(vararg workExperiences: WorkExperience)
 
     @Insert
-    fun insert(workExperience: WorkExperience)
+    suspend fun insert(workExperience: WorkExperience)
 
     @Update
-    fun update(workExperience: WorkExperience)
+    suspend fun update(workExperience: WorkExperience)
 
     @Delete
-    fun delete(workExperience: WorkExperience)
+    suspend fun delete(workExperience: WorkExperience)
 }

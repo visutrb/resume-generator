@@ -7,23 +7,23 @@ import me.visutrb.resumegen.entity.Education
 interface EducationDao {
 
     @Query("SELECT * FROM Education")
-    fun findAll(): List<Education>
+    suspend fun findAll(): List<Education>
 
     @Query("SELECT * FROM Education WHERE resumeId = :resumeId")
-    fun findAllByResumeId(resumeId: Int): List<Education>
+    suspend fun findAllByResumeId(resumeId: Int): List<Education>
 
     @Query("SELECT * FROM Education WHERE id = :id")
-    fun findById(id: Int): Education
+    suspend fun findById(id: Int): Education
 
     @Insert
-    fun insertAll(vararg educations: Education)
+    suspend fun insertAll(vararg educations: Education)
 
     @Insert
-    fun insert(education: Education)
+    suspend fun insert(education: Education)
 
     @Update
-    fun update(education: Education)
+    suspend fun update(education: Education)
 
     @Delete
-    fun delete(education: Education)
+    suspend fun delete(education: Education)
 }

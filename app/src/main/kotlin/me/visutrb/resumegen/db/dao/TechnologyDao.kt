@@ -7,23 +7,23 @@ import me.visutrb.resumegen.entity.Technology
 interface TechnologyDao {
 
     @Query("SELECT * FROM Technology")
-    fun findAll(): List<Technology>
+    suspend fun findAll(): List<Technology>
 
     @Query("SELECT * FROM Technology WHERE projectId = :projectId")
-    fun findAllByProjectId(projectId: Int): List<Technology>
+    suspend fun findAllByProjectId(projectId: Int): List<Technology>
 
     @Query("SELECT * FROM Technology WHERE id = :id")
-    fun findById(id: Int): Technology
+    suspend fun findById(id: Int): Technology
 
     @Insert
-    fun insertAll(vararg technologies: Technology)
+    suspend fun insertAll(vararg technologies: Technology)
 
     @Insert
-    fun insert(technology: Technology)
+    suspend fun insert(technology: Technology)
 
     @Update
-    fun update(technology: Technology)
+    suspend fun update(technology: Technology)
 
     @Delete
-    fun delete(technology: Technology)
+    suspend fun delete(technology: Technology)
 }

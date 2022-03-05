@@ -7,23 +7,23 @@ import me.visutrb.resumegen.entity.Skill
 interface SkillDao {
 
     @Query("SELECT * FROM Skill")
-    fun findAll(): List<Skill>
+    suspend fun findAll(): List<Skill>
 
     @Query("SELECT * FROM Skill WHERE resumeId = :resumeId")
-    fun findByResumeId(resumeId: Int): List<Skill>
+    suspend fun findByResumeId(resumeId: Int): List<Skill>
 
     @Query("SELECT * FROM Skill WHERE id = :id")
-    fun findById(id: Int): Skill
+    suspend fun findById(id: Int): Skill
 
     @Insert
-    fun insertAll(vararg skills: Skill)
+    suspend fun insertAll(vararg skills: Skill)
 
     @Insert
-    fun insert(skill: Skill)
+    suspend fun insert(skill: Skill)
 
     @Update
-    fun update(skill: Skill)
+    suspend fun update(skill: Skill)
 
     @Delete
-    fun delete(skill: Skill)
+    suspend fun delete(skill: Skill)
 }
