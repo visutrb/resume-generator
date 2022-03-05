@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ResumeGenerator">
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.resumelist.ResumeListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
