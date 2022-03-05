@@ -10,6 +10,9 @@ data class Resume(
     val firstName: String,
     val middleName: String? = null,
     val lastName: String,
+    val profilePicturePath: String,
+    val phoneNumber: String,
+    val emailAddress: String,
     val createDate: Date = Date(),
     val updateDate: Date = Date()
 )
