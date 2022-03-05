@@ -8,5 +8,6 @@ data class WorkExperience(
     val startMonth: Int,
     val startYear: Int,
     val endMonth: Int = -1,
-    val endYear: Int = 0
+    val endYear: Int = 0,
+    val resumeId: Int
 )
