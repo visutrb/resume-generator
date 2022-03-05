@@ -9,10 +9,10 @@ import me.visutrb.resumegen.entity.Resume
 @Dao
 interface ResumeDao {
 
-    @Query("SELECT * FROM resume")
+    @Query("SELECT * FROM Resume")
     fun findAll(): List<Resume>
 
-    @Query("SELECT * FROM resume WHERE id = :id")
+    @Query("SELECT * FROM Resume WHERE id = :id")
     fun findById(id: Int): Resume
 
     @Insert
