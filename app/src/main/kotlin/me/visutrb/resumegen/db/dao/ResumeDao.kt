@@ -1,9 +1,6 @@
 package me.visutrb.resumegen.db.dao
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import me.visutrb.resumegen.db.dto.ResumeWithRelations
 import me.visutrb.resumegen.entity.Resume
 
@@ -24,6 +21,12 @@ interface ResumeDao {
 
     @Insert
     fun insertAll(vararg resumes: Resume)
+
+    @Insert
+    fun insert(resume: Resume)
+
+    @Update
+    fun update(resume: Resume)
 
     @Delete
     fun delete(resume: Resume)
