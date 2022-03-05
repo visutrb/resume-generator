@@ -13,6 +13,7 @@ data class Resume(
     val profilePicturePath: String,
     val phoneNumber: String,
     val emailAddress: String,
+    val careerObjective: String,
     val createDate: Date = Date(),
     val updateDate: Date = Date()
 )
