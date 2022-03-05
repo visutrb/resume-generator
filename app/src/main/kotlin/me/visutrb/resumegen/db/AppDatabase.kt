@@ -17,4 +17,5 @@ import me.visutrb.resumegen.entity.*
     version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
+    abstract fun resumeDao(): ResumeDao
 }
