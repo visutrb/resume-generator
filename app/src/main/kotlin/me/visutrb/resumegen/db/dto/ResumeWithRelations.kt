@@ -23,8 +23,9 @@ data class ResumeWithRelations(
     val educations: List<Education>,
 
     @Relation(
+        entity = Project::class,
         parentColumn = "id",
         entityColumn = "resumeId"
     )
-    val projects: List<Project>
+    val projectsWithTechnologies: List<ProjectWithTechnologies>
 )
