@@ -2,6 +2,8 @@ package me.visutrb.resumegen.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import me.visutrb.resumegen.db.converter.DateConverter
 import me.visutrb.resumegen.db.dao.*
 import me.visutrb.resumegen.entity.*
 
@@ -16,6 +18,7 @@ import me.visutrb.resumegen.entity.*
     ],
     version = 1
 )
+@TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun educationDao(): EducationDao
     abstract fun projectDao(): ProjectDao
