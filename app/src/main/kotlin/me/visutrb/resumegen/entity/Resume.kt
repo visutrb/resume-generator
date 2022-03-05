@@ -14,6 +14,7 @@ data class Resume(
     val phoneNumber: String,
     val emailAddress: String,
     val careerObjective: String,
+    val totalYearsOfExp: Int,
     val createDate: Date = Date(),
     val updateDate: Date = Date()
 )
