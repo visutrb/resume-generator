@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".mvp.resumeform.ResumeFormActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profile_picture_imv"
+            android:layout_width="0dp"
+            android:layout_height="220dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_icon_imv"
+            android:layout_width="@dimen/resume_form_icon_size"
+            android:layout_height="@dimen/resume_form_icon_size"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_image_filled"
+            app:layout_constraintBottom_toBottomOf="@id/profile_picture_imv"
+            app:layout_constraintEnd_toEndOf="@id/profile_picture_imv" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/person_icon_imv"
+            android:layout_width="@dimen/resume_form_icon_size"
+            android:layout_height="@dimen/resume_form_icon_size"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/first_name_edt"
+            app:layout_constraintEnd_toStartOf="@id/first_name_edt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/first_name_edt"
+            app:srcCompat="@drawable/ic_person_filled" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/first_name_edt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="56dp"
+            android:hint="@string/resume_form_first_name"
+            android:imeOptions="actionNext"
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/person_icon_imv"
+            app:layout_constraintTop_toBottomOf="@id/profile_picture_imv"
+            tools:text="@tools:sample/first_names" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/last_name_edt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            android:hint="@string/resume_form_last_name"
+            android:imeOptions="actionNext"
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            app:layout_constraintEnd_toEndOf="@id/first_name_edt"
+            app:layout_constraintStart_toStartOf="@id/first_name_edt"
+            app:layout_constraintTop_toBottomOf="@id/first_name_edt"
+            tools:text="@tools:sample/last_names" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/phone_icon_imv"
+            android:layout_width="@dimen/resume_form_icon_size"
+            android:layout_height="@dimen/resume_form_icon_size"
+            android:layout_marginStart="16dp"
+
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_phone_filled"
+            app:layout_constraintBottom_toBottomOf="@id/mobile_number_edt"
+            app:layout_constraintEnd_toStartOf="@id/mobile_number_edt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/mobile_number_edt" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/mobile_number_edt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            android:hint="@string/resume_form_mobile_number"
+            android:inputType="phone"
+            android:maxLines="1"
+            app:layout_constraintEnd_toEndOf="@id/last_name_edt"
+            app:layout_constraintStart_toStartOf="@id/last_name_edt"
+            app:layout_constraintTop_toBottomOf="@id/last_name_edt"
+            tools:text="@tools:sample/us_phones" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/email_icon_imv"
+            android:layout_width="@dimen/resume_form_icon_size"
+            android:layout_height="@dimen/resume_form_icon_size"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_email_filled"
+            app:layout_constraintBottom_toBottomOf="@id/email_edt"
+            app:layout_constraintEnd_toStartOf="@id/email_edt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/email_edt" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/email_edt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            android:hint="@string/resume_form_email"
+            android:imeOptions="actionNext"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            app:layout_constraintEnd_toEndOf="@id/mobile_number_edt"
+            app:layout_constraintStart_toStartOf="@id/mobile_number_edt"
+            app:layout_constraintTop_toBottomOf="@id/mobile_number_edt" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/address_icon_imv"
+            android:layout_width="@dimen/resume_form_icon_size"
+            android:layout_height="@dimen/resume_form_icon_size"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_home_filled"
+            app:layout_constraintBottom_toBottomOf="@id/address1_edt"
+            app:layout_constraintEnd_toStartOf="@id/address1_edt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/address1_edt" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/address1_edt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            android:hint="@string/resume_form_street_address"
+            android:imeOptions="actionNext"
+            android:inputType="textPostalAddress"
+            android:maxLines="1"
+            app:layout_constraintEnd_toEndOf="@id/email_edt"
+            app:layout_constraintStart_toStartOf="@id/email_edt"
+            app:layout_constraintTop_toBottomOf="@id/email_edt" />
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/city_edt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            android:layout_marginEnd="2dp"
+            android:hint="@string/resume_form_city"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:maxLines="1"
+            app:layout_constraintEnd_toStartOf="@id/state_edt"
+            app:layout_constraintStart_toStartOf="@id/address1_edt"
+            app:layout_constraintTop_toBottomOf="@id/address1_edt" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/state_edt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:hint="@string/resume_form_state"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:maxLines="1"
+            app:layout_constraintEnd_toEndOf="@id/address1_edt"
+            app:layout_constraintStart_toEndOf="@id/city_edt"
+            app:layout_constraintTop_toTopOf="@id/city_edt" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/country_edt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            android:hint="@string/resume_form_country"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:maxLines="1"
+            app:layout_constraintEnd_toEndOf="@id/city_edt"
+            app:layout_constraintStart_toStartOf="@id/city_edt"
+            app:layout_constraintTop_toBottomOf="@id/city_edt" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/postal_code_edt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/resume_form_postal_code"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:maxLines="1"
+            app:layout_constraintEnd_toEndOf="@id/state_edt"
+            app:layout_constraintStart_toEndOf="@id/country_edt"
+            app:layout_constraintStart_toStartOf="@id/state_edt"
+            app:layout_constraintTop_toTopOf="@id/country_edt" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/resume_form_icon_size"
+            android:layout_height="@dimen/resume_form_icon_size"
+            android:src="@drawable/ic_flag_filled"
+            app:layout_constraintEnd_toStartOf="@id/career_objective_edt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/career_objective_edt" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/career_objective_edt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            android:hint="@string/resume_form_career_objective"
+            android:lines="3"
+            app:layout_constraintEnd_toEndOf="@id/postal_code_edt"
+            app:layout_constraintStart_toStartOf="@id/country_edt"
+            app:layout_constraintTop_toBottomOf="@id/country_edt" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/resume_form_icon_size"
+            android:layout_height="@dimen/resume_form_icon_size"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_handyman_filled"
+            app:layout_constraintBottom_toBottomOf="@id/skills_label_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/skills_label_tv" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/skills_label_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            android:text="@string/resume_form_skills"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@id/career_objective_edt"
+            app:layout_constraintStart_toStartOf="@id/career_objective_edt"
+            app:layout_constraintTop_toBottomOf="@id/career_objective_edt" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/skills_chip_group"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/skills_label_tv"
+            app:layout_constraintStart_toStartOf="@id/skills_label_tv"
+            app:layout_constraintTop_toBottomOf="@id/skills_label_tv"></com.google.android.material.chip.ChipGroup>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/skill_edt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/add_skill_btn"
+            app:layout_constraintStart_toStartOf="@id/skills_chip_group"
+            app:layout_constraintTop_toBottomOf="@id/skills_chip_group" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:id="@+id/add_skill_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/resume_form_add_skill"
+            app:layout_constraintBottom_toBottomOf="@id/skill_edt"
+            app:layout_constraintEnd_toEndOf="@id/skills_chip_group"
+            android:textAllCaps="false"
+            app:layout_constraintStart_toEndOf="@id/skill_edt"
+            app:layout_constraintTop_toTopOf="@id/skill_edt" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
