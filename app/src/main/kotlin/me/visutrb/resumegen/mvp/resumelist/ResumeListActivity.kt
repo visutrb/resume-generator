@@ -5,10 +5,10 @@ import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import me.visutrb.resumegen.databinding.ActivityResumeListBinding
 import me.visutrb.resumegen.entity.Resume
-import me.visutrb.resumegen.mvp.BaseActivity
+import me.visutrb.resumegen.mvp.Activity
 import org.koin.android.ext.android.inject
 
-class ResumeListActivity : BaseActivity(), ResumeListPresenter.View {
+class ResumeListActivity : Activity(), ResumeListPresenter.View {
 
     private lateinit var binding: ActivityResumeListBinding
     private lateinit var recyclerViewAdapter: ResumeListRecyclerViewAdapter
