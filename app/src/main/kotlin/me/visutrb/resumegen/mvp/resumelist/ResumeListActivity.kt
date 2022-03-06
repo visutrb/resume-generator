@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import me.visutrb.resumegen.databinding.ActivityResumeListBinding
 import me.visutrb.resumegen.entity.Resume
 import me.visutrb.resumegen.mvp.Activity
+import me.visutrb.resumegen.mvp.resumeform.ResumeFormActivity
 import org.koin.android.ext.android.inject
 
 class ResumeListActivity : Activity(), ResumeListPresenter.View {
@@ -44,7 +45,8 @@ class ResumeListActivity : Activity(), ResumeListPresenter.View {
     }
 
     private fun launchResumeFormActivity() {
-
+        val intent = ResumeFormActivity.newIntent(this)
+        startActivity(intent)
     }
 
 }
