@@ -23,12 +23,13 @@ class ResumeListRecyclerViewAdapter :
         }
     }
 
-    fun addAll(vararg resumes: Resume) {
+    fun addAll(resumes: List<Resume>) {
         val newItemsCount = resumes.size
         val currentItemsCount = this.resumes.size
         this.resumes.addAll(resumes)
         notifyItemRangeInserted(currentItemsCount, newItemsCount)
     }
+
 
     fun add(resume: Resume) {
         val currentItemsCount = resumes.size
