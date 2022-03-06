@@ -3,4 +3,17 @@
 
     <string name="resume_list_create_resume">Create Resumé</string>
     <string name="resume_list_no_resume">No Resumé</string>
+
+    <string name="resume_form_first_name">First Name</string>
+    <string name="resume_form_last_name">Last Name</string>
+    <string name="resume_form_mobile_number">Mobile Number</string>
+    <string name="resume_form_email">Email</string>
+    <string name="resume_form_street_address">Street Address</string>
+    <string name="resume_form_city">City</string>
+    <string name="resume_form_state">State</string>
+    <string name="resume_form_country">Country</string>
+    <string name="resume_form_postal_code">Postal Code</string>
+    <string name="resume_form_career_objective">Career Objective</string>
+    <string name="resume_form_skills">Skills</string>
+    <string name="resume_form_add_skill">Add Skill</string>
 </resources>
