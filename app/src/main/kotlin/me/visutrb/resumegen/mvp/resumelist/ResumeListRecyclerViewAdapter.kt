@@ -1,4 +1,4 @@
-package me.visutrb.resumegen.ui.resumelist
+package me.visutrb.resumegen.mvp.resumelist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

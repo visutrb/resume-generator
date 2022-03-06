@@ -1,4 +1,4 @@
-package me.visutrb.resumegen.ui
+package me.visutrb.resumegen.mvp
 
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope

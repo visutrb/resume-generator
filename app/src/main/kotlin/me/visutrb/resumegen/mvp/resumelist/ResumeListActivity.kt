@@ -1,10 +1,10 @@
-package me.visutrb.resumegen.ui.resumelist
+package me.visutrb.resumegen.mvp.resumelist
 
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import me.visutrb.resumegen.databinding.ActivityResumeListBinding
-import me.visutrb.resumegen.ui.BaseActivity
+import me.visutrb.resumegen.mvp.BaseActivity
 
 class ResumeListActivity : BaseActivity() {
 

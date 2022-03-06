@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.resumelist.ResumeListActivity">
+    tools:context=".mvp.resumelist.ResumeListActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/resume_rv"
