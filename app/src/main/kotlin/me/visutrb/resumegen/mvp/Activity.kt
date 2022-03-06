@@ -1,4 +1,4 @@
-package me.visutrb.resumegen.ui
+package me.visutrb.resumegen.mvp
 
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
@@ -9,7 +9,7 @@ import org.koin.androidx.scope.activityScope
 import org.koin.core.scope.Scope
 import kotlin.coroutines.CoroutineContext
 
-abstract class BaseActivity : AppCompatActivity(), CoroutineScope, AndroidScopeComponent {
+abstract class Activity : AppCompatActivity(), CoroutineScope, AndroidScopeComponent {
     protected val job = Job()
     override val coroutineContext: CoroutineContext = job + Dispatchers.Main
 

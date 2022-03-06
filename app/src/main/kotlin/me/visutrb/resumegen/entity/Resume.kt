@@ -19,4 +19,14 @@ data class Resume(
     val totalYearsOfExp: Int,
     val createDate: Date = Date(),
     val updateDate: Date = Date()
-)
+) {
+
+    val fullName: String
+        get() {
+            return if (middleName?.isNotBlank() == true || middleName?.isNotEmpty() == true) {
+                "$firstName $middleName $lastName"
+            } else {
+                "$firstName $lastName"
+            }
+        }
+}
