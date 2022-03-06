@@ -4,12 +4,16 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import me.visutrb.resumegen.databinding.ActivityResumeListBinding
+import me.visutrb.resumegen.entity.Resume
 import me.visutrb.resumegen.mvp.BaseActivity
+import org.koin.android.ext.android.inject
 
-class ResumeListActivity : BaseActivity() {
+class ResumeListActivity : BaseActivity(), ResumeListPresenter.View {
 
     private lateinit var binding: ActivityResumeListBinding
     private lateinit var recyclerViewAdapter: ResumeListRecyclerViewAdapter
+
+    private val presenter: ResumeListPresenter by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,9 +28,23 @@ class ResumeListActivity : BaseActivity() {
         }
 
         binding.createResumeBtn.setOnClickListener {
-            TODO("Start new resume activity")
+            launchResumeFormActivity()
         }
 
         binding.noResumeTv.visibility = View.VISIBLE
     }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.loadResumes()
+    }
+
+    override fun renderResumes(resumes: List<Resume>) {
+        recyclerViewAdapter.addAll(resumes)
+    }
+
+    private fun launchResumeFormActivity() {
+
+    }
+
 }
