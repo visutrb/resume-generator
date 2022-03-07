@@ -400,74 +400,7 @@
             android:showDividers="middle"
             app:layout_constraintEnd_toEndOf="@id/add_education_btn"
             app:layout_constraintStart_toStartOf="@id/education_label_tv"
-            app:layout_constraintTop_toBottomOf="@id/add_education_btn">
-
-            <!--            <LinearLayout-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginTop="4dp"-->
-            <!--                android:layout_marginBottom="4dp"-->
-            <!--                android:orientation="vertical">-->
-
-            <!--                <TextView-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:text="Asian Institute of Technology (Thailand)"-->
-            <!--                    android:textSize="18sp" />-->
-
-            <!--                <TextView-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:text="Master, Computer Science (2019)" />-->
-
-            <!--                <TextView-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_marginTop="4dp"-->
-            <!--                    android:text="CGPA: 3.77" />-->
-
-            <!--                <com.google.android.material.button.MaterialButton-->
-            <!--                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_marginTop="8dp"-->
-            <!--                    android:layout_marginBottom="8dp"-->
-            <!--                    android:text="Edit" />-->
-            <!--            </LinearLayout>-->
-
-            <!--            <LinearLayout-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginTop="4dp"-->
-            <!--                android:layout_marginBottom="4dp"-->
-            <!--                android:orientation="vertical">-->
-
-            <!--                <TextView-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:text="Asian Institute of Technology (Thailand)"-->
-            <!--                    android:textSize="18sp" />-->
-
-            <!--                <TextView-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:text="Bachelor, Information and Communication Technology, (2016)" />-->
-
-            <!--                <TextView-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_marginTop="4dp"-->
-            <!--                    android:text="CGPA: 3.77" />-->
-
-            <!--                <com.google.android.material.button.MaterialButton-->
-            <!--                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_marginTop="8dp"-->
-            <!--                    android:layout_marginBottom="8dp"-->
-            <!--                    android:text="Edit" />-->
-            <!--            </LinearLayout>-->
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@id/add_education_btn"></LinearLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/work_experiences_icon_imv"
@@ -506,45 +439,12 @@
             android:id="@+id/work_experiences_container_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:divider="?android:attr/dividerVertical"
             android:orientation="vertical"
             android:showDividers="middle"
             app:layout_constraintEnd_toEndOf="@id/add_work_experience_btn"
             app:layout_constraintStart_toStartOf="@id/work_experiences_label_tv"
-            app:layout_constraintTop_toBottomOf="@id/add_work_experience_btn">
-
-            <!--            <LinearLayout-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginTop="4dp"-->
-            <!--                android:layout_marginBottom="4dp"-->
-            <!--                android:orientation="vertical">-->
-
-            <!--                <TextView-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:text="Asian Institute of Technology"-->
-            <!--                    android:textSize="18sp" />-->
-
-            <!--                <TextView-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:text="Research Associate" />-->
-
-            <!--                <TextView-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_marginTop="4dp"-->
-            <!--                    android:text="August 2019 - Present" />-->
-
-            <!--                <com.google.android.material.button.MaterialButton-->
-            <!--                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_marginTop="8dp"-->
-            <!--                    android:layout_marginBottom="8dp"-->
-            <!--                    android:text="Edit" />-->
-            <!--            </LinearLayout>-->
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@id/add_work_experience_btn"></LinearLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/projects_icon_imv"
@@ -583,7 +483,9 @@
             android:id="@+id/projects_container_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:divider="?android:attr/dividerVertical"
             android:orientation="vertical"
+            android:showDividers="middle"
             app:layout_constraintEnd_toEndOf="@id/add_project_btn"
             app:layout_constraintStart_toStartOf="@id/projects_label_tv"
             app:layout_constraintTop_toBottomOf="@id/add_project_btn">

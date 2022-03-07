@@ -94,7 +94,7 @@ class ResumeFormActivity : Activity() {
 
         workExperienceFormResultLauncher =
             registerForActivityResult(WorkExperienceFormResultContract()) { workExperience ->
-                Log.d(TAG, "Received workExperience: $workExperience")
+                workExperience?.let { addOrUpdateWorkExperience(it) }
             }
     }
 
@@ -113,7 +113,7 @@ class ResumeFormActivity : Activity() {
             binding.careerObjectiveEdt.setText(it.careerObjective)
         }
 
-        resume.skillsHolder.skills.forEach { }
+        resume.skillsHolder.skills.forEach { addSkillChip(it) }
     }
 
     private fun setupViews() {
@@ -147,6 +147,29 @@ class ResumeFormActivity : Activity() {
         Log.d(TAG, "selectOrTakePicture")
     }
 
+    private fun addSkill() {
+        val skillName = binding.skillEdt.text.toString()
+        if (skillName.isBlank()) {
+            return
+        }
+        binding.skillEdt.setText("")
+        val skill = Skill(name = skillName)
+        resume.skillsHolder.skills.add(skill)
+        addSkillChip(skill)
+    }
+
+    private fun addSkillChip(skill: Skill) {
+        val chip = Chip(this).apply {
+            text = skill.name
+            isCloseIconVisible = true
+            setOnCloseIconClickListener {
+                resume.skillsHolder.skills.remove(skill)
+                binding.skillsChipGroup.removeView(it)
+            }
+        }
+        binding.skillsChipGroup.addView(chip)
+    }
+
     private fun addOrUpdateEducation(education: Education) {
         val idx = educations.indexOfFirst { it.uuid == education.uuid }
         if (idx != -1) {
@@ -171,27 +194,28 @@ class ResumeFormActivity : Activity() {
         binding.educationsContainerLayout.addView(preview)
     }
 
-    private fun addSkill() {
-        val skillName = binding.skillEdt.text.toString()
-        if (skillName.isBlank()) {
+    private fun addOrUpdateWorkExperience(workExperience: WorkExperience) {
+        val idx = workExperiences.indexOfFirst { it.uuid == workExperience.uuid }
+        if (idx != -1) {
+            workExperiences[idx] = workExperience
+            binding.workExperiencesContainerLayout.children.find {
+                (it as WorkExperiencePreviewView).workExperience?.uuid == workExperience.uuid
+            }?.let {
+                (it as WorkExperiencePreviewView).workExperience = workExperience
+            }
             return
         }
-        binding.skillEdt.setText("")
-        val skill = Skill(name = skillName)
-        resume.skillsHolder.skills.add(skill)
-        addSkillChip(skill)
-    }
 
-    private fun addSkillChip(skill: Skill) {
-        val chip = Chip(this).apply {
-            text = skill.name
-            isCloseIconVisible = true
-            setOnCloseIconClickListener {
-                resume.skillsHolder.skills.remove(skill)
-                binding.skillsChipGroup.removeView(it)
+        workExperiences.add(workExperience)
+        val preview = WorkExperiencePreviewView(this).apply {
+            this.workExperience = workExperience
+            onEditWorkExperience = { launchWorkExperienceFormActivity(it) }
+            onDeleteWorkExperience = {
+                workExperiences.remove(workExperience)
+                binding.workExperiencesContainerLayout.removeView(this)
             }
         }
-        binding.skillsChipGroup.addView(chip)
+        binding.workExperiencesContainerLayout.addView(preview)
     }
 
     private fun launchEducationFormActivity(education: Education? = null) {
@@ -202,8 +226,8 @@ class ResumeFormActivity : Activity() {
         projectFormResultLauncher.launch(null)
     }
 
-    private fun launchWorkExperienceFormActivity() {
-        workExperienceFormResultLauncher.launch(null)
+    private fun launchWorkExperienceFormActivity(workExperience: WorkExperience? = null) {
+        workExperienceFormResultLauncher.launch(workExperience)
     }
 
     private fun validateAndSaveResult() {
