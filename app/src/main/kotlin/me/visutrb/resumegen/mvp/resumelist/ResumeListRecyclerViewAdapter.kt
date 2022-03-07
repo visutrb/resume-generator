@@ -23,13 +23,18 @@ class ResumeListRecyclerViewAdapter :
         }
     }
 
+    fun replaceAll(resumes: List<Resume>) {
+        this.resumes.clear()
+        this.resumes.addAll(resumes)
+        notifyDataSetChanged()
+    }
+
     fun addAll(resumes: List<Resume>) {
         val newItemsCount = resumes.size
         val currentItemsCount = this.resumes.size
         this.resumes.addAll(resumes)
         notifyItemRangeInserted(currentItemsCount, newItemsCount)
     }
-
 
     fun add(resume: Resume) {
         val currentItemsCount = resumes.size

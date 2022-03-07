@@ -1,7 +1,6 @@
 package me.visutrb.resumegen.mvp.resumelist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import me.visutrb.resumegen.databinding.ActivityResumeListBinding
@@ -21,6 +20,8 @@ class ResumeListActivity : Activity(), ResumeListPresenter.View {
         super.onCreate(savedInstanceState)
         binding = ActivityResumeListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        presenter.view = this
 
         recyclerViewAdapter = ResumeListRecyclerViewAdapter()
 
@@ -42,8 +43,11 @@ class ResumeListActivity : Activity(), ResumeListPresenter.View {
     }
 
     override fun renderResumes(resumes: List<Resume>) {
-        Log.d(TAG, "resumes: $resumes")
-        recyclerViewAdapter.addAll(resumes)
+        binding.noResumeTv.visibility = when (resumes.isEmpty()) {
+            true -> View.VISIBLE
+            false -> View.GONE
+        }
+        recyclerViewAdapter.replaceAll(resumes)
     }
 
     private fun launchResumeFormActivity() {

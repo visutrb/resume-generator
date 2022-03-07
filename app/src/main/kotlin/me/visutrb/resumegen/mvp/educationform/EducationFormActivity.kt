@@ -3,7 +3,6 @@ package me.visutrb.resumegen.mvp.educationform
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
@@ -143,7 +142,6 @@ class EducationFormActivity : AppCompatActivity() {
         val intent = Intent().apply {
             putExtra(EXTRA_EDUCATION, education)
         }
-        Log.d(TAG, "Sending result: $education")
         setResult(RESULT_OK, intent)
         finish()
     }

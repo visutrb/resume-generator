@@ -16,14 +16,20 @@ interface EducationDao {
     suspend fun findById(id: Int): Education
 
     @Insert
-    suspend fun insertAll(vararg educations: Education)
+    suspend fun insertAll(educations: List<Education>): List<Long>
 
     @Insert
-    suspend fun insert(education: Education)
+    suspend fun insert(education: Education): Long
 
     @Update
     suspend fun update(education: Education)
 
+    @Update
+    suspend fun updateAll(educations: List<Education>)
+
     @Delete
     suspend fun delete(education: Education)
+
+    @Delete
+    suspend fun deleteAll(educations: List<Education>)
 }

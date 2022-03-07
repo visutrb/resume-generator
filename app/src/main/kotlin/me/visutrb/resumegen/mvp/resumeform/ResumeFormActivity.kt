@@ -13,12 +13,8 @@ import android.widget.EditText
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.view.children
 import com.google.android.material.chip.Chip
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import me.visutrb.resumegen.R
 import me.visutrb.resumegen.databinding.ActivityResumeFormBinding
-import me.visutrb.resumegen.db.dao.ResumeDao
 import me.visutrb.resumegen.entity.*
 import me.visutrb.resumegen.mvp.Activity
 import me.visutrb.resumegen.mvp.educationform.EducationFormResultContract
@@ -26,7 +22,7 @@ import me.visutrb.resumegen.mvp.projectform.ProjectFormResultContract
 import me.visutrb.resumegen.mvp.workexpform.WorkExperienceFormResultContract
 import org.koin.android.ext.android.inject
 
-class ResumeFormActivity : Activity() {
+class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
 
     private lateinit var binding: ActivityResumeFormBinding
 
@@ -40,12 +36,14 @@ class ResumeFormActivity : Activity() {
     private var workExperiences = mutableListOf<WorkExperience>()
     private var projects = mutableListOf<Project>()
 
-    private val resumeDao: ResumeDao by inject()
+    private val presenter: ResumeFormPresenter by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResumeFormBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        presenter.view = this
 
         setupActionBar()
         setupLaunchers()
@@ -100,20 +98,22 @@ class ResumeFormActivity : Activity() {
 
     private fun setupInitialData() {
         resume = intent.getParcelableExtra(EXTRA_RESUME) ?: Resume()
-        resume.let {
-            binding.firstNameEdt.setText(it.firstName)
-            binding.lastNameEdt.setText(it.lastName)
-            binding.mobileNumberEdt.setText(it.phoneNumber)
-            binding.emailEdt.setText(it.emailAddress)
-            binding.addressEdt.setText(it.address.street)
-            binding.cityEdt.setText(it.address.city)
-            binding.stateEdt.setText(it.address.state)
-            binding.countryEdt.setText(it.address.country)
-            binding.postalCodeEdt.setText(it.address.postalCode)
-            binding.careerObjectiveEdt.setText(it.careerObjective)
-        }
+        presenter.loadRelatedData(resume)
+    }
 
-        resume.skillsHolder.skills.forEach { addSkillChip(it) }
+    override fun onRelatedDataLoaded(
+        educations: List<Education>,
+        workExperiences: List<WorkExperience>,
+        projects: List<Project>
+    ) {
+        this.educations.addAll(educations)
+        this.workExperiences.addAll(workExperiences)
+        this.projects.addAll(projects)
+        renderData()
+    }
+
+    override fun onLoadRelatedDataFailed(e: Exception) {
+        TODO("Not yet implemented")
     }
 
     private fun setupViews() {
@@ -141,6 +141,23 @@ class ResumeFormActivity : Activity() {
         binding.addEducationBtn.setOnClickListener { launchEducationFormActivity() }
         binding.addProjectBtn.setOnClickListener { launchProjectFormActivity() }
         binding.addWorkExperienceBtn.setOnClickListener { launchWorkExperienceFormActivity() }
+    }
+
+    private fun renderData() {
+        resume.let {
+            binding.firstNameEdt.setText(it.firstName)
+            binding.lastNameEdt.setText(it.lastName)
+            binding.mobileNumberEdt.setText(it.phoneNumber)
+            binding.emailEdt.setText(it.emailAddress)
+            binding.addressEdt.setText(it.address.street)
+            binding.cityEdt.setText(it.address.city)
+            binding.stateEdt.setText(it.address.state)
+            binding.countryEdt.setText(it.address.country)
+            binding.postalCodeEdt.setText(it.address.postalCode)
+            binding.careerObjectiveEdt.setText(it.careerObjective)
+        }
+
+        resume.skillsHolder.skills.forEach { addSkillChip(it) }
     }
 
     private fun selectOrTakePicture() {
@@ -187,6 +204,7 @@ class ResumeFormActivity : Activity() {
             this.education = education
             onEditEducation = { launchEducationFormActivity(it) }
             onDeleteEducation = {
+                presenter.deleteEducation(education)
                 educations.remove(education)
                 binding.educationsContainerLayout.removeView(this)
             }
@@ -211,6 +229,7 @@ class ResumeFormActivity : Activity() {
             this.workExperience = workExperience
             onEditWorkExperience = { launchWorkExperienceFormActivity(it) }
             onDeleteWorkExperience = {
+                presenter.deleteWorkExperience(workExperience)
                 workExperiences.remove(workExperience)
                 binding.workExperiencesContainerLayout.removeView(this)
             }
@@ -235,6 +254,7 @@ class ResumeFormActivity : Activity() {
             this.project = project
             onEditProject = { launchProjectFormActivity(it) }
             onDeleteProject = {
+                presenter.deleteProject(project)
                 projects.remove(project)
                 binding.projectsContainerLayout.removeView(this)
             }
@@ -262,6 +282,9 @@ class ResumeFormActivity : Activity() {
         val mobile = binding.mobileNumberEdt.text.toString()
         val street = binding.addressEdt.text.toString()
         val city = binding.cityEdt.text.toString()
+        val state = binding.stateEdt.text.toString()
+        val country = binding.countryEdt.text.toString()
+        val postalCode = binding.postalCodeEdt.text.toString()
         val obj = binding.careerObjectiveEdt.text.toString()
 
         if (firstName.isBlank() || firstName.isEmpty()) {
@@ -289,6 +312,21 @@ class ResumeFormActivity : Activity() {
             isValid = false
         }
 
+        if (state.isBlank() || state.isEmpty()) {
+            binding.stateEdt.error = getString(R.string.error_required)
+            isValid = false
+        }
+
+        if (country.isBlank() || country.isEmpty()) {
+            binding.countryEdt.error = getString(R.string.error_required)
+            isValid = false
+        }
+
+        if (postalCode.isBlank() || postalCode.isEmpty()) {
+            binding.postalCodeEdt.error = getString(R.string.error_required)
+            isValid = false
+        }
+
         if (obj.isBlank() || obj.isEmpty()) {
             binding.careerObjectiveEdt.error = getString(R.string.error_required)
             isValid = false
@@ -298,9 +336,29 @@ class ResumeFormActivity : Activity() {
             return
         }
 
-        launch {
-            withContext(Dispatchers.IO) { resumeDao.insert(resume) }
+        resume.let {
+            it.firstName = firstName
+            it.lastName = lastName
+            it.phoneNumber = mobile
+            it.address = Address(
+                street = street,
+                city = city,
+                state = state,
+                country = country,
+                postalCode = postalCode
+            )
+            it.careerObjective = obj
         }
+
+        presenter.saveData(resume, educations, workExperiences, projects)
+    }
+
+    override fun onDataSaved() {
+        finish()
+    }
+
+    override fun onSaveDataFailed(e: Exception) {
+        Log.e(TAG, "Cannot save data", e)
     }
 
     companion object {

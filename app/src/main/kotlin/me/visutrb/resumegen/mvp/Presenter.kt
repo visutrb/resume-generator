@@ -11,7 +11,6 @@ abstract class Presenter<View : Presenter.View> : CoroutineScope {
     override val coroutineContext: CoroutineContext = Job() + Dispatchers.Main
 
     var view: View? = null
-        protected set
 
     interface View
 }

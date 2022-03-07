@@ -10,9 +10,6 @@ interface ResumeDao {
     @Query("SELECT * FROM Resume")
     suspend fun findAll(): List<Resume>
 
-    @Query("SELECT * FROM Resume")
-    suspend fun findAllWithRelations(): List<ResumeWithRelations>
-
     @Query("SELECT * FROM Resume WHERE id = :id")
     suspend fun findById(id: Int): Resume
 
@@ -20,14 +17,20 @@ interface ResumeDao {
     suspend fun findByIdWithRelations(id: Int): ResumeWithRelations
 
     @Insert
-    suspend fun insertAll(vararg resumes: Resume)
+    suspend fun insertAll(vararg resumes: Resume): List<Long>
 
     @Insert
-    suspend fun insert(resume: Resume)
+    suspend fun insert(resume: Resume): Long
 
     @Update
     suspend fun update(resume: Resume)
 
+    @Update
+    suspend fun updateAll(resumes: List<Resume>)
+
     @Delete
     suspend fun delete(resume: Resume)
+
+    @Delete
+    suspend fun deleteAll(resumes: List<Resume>)
 }
