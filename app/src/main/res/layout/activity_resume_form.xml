@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="16dp">
+        android:layout_marginBottom="16dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/profile_picture_imv"
@@ -20,9 +20,11 @@
             android:clickable="true"
             android:focusable="true"
             android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@id/first_name_input_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
             tools:src="@tools:sample/avatars" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -55,6 +57,7 @@
             android:layout_marginEnd="56dp"
             android:hint="@string/resume_form_first_name"
             app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/last_name_input_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/person_icon_imv"
             app:layout_constraintTop_toBottomOf="@id/profile_picture_imv">
@@ -76,6 +79,7 @@
             android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
             android:hint="@string/resume_form_last_name"
             app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/mobile_number_input_layout"
             app:layout_constraintEnd_toEndOf="@id/first_name_input_layout"
             app:layout_constraintStart_toStartOf="@id/first_name_input_layout"
             app:layout_constraintTop_toBottomOf="@id/first_name_input_layout">
@@ -95,7 +99,6 @@
             android:layout_width="@dimen/resume_form_icon_size"
             android:layout_height="@dimen/resume_form_icon_size"
             android:layout_marginStart="16dp"
-
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_phone_filled"
             app:layout_constraintBottom_toBottomOf="@id/mobile_number_input_layout"
@@ -110,6 +113,7 @@
             android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
             android:hint="@string/resume_form_mobile_number"
             app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/email_input_layout"
             app:layout_constraintEnd_toEndOf="@id/last_name_input_layout"
             app:layout_constraintStart_toStartOf="@id/last_name_input_layout"
             app:layout_constraintTop_toBottomOf="@id/last_name_input_layout">
@@ -142,6 +146,7 @@
             android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
             android:hint="@string/resume_form_email"
             app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/address_input_layout"
             app:layout_constraintEnd_toEndOf="@id/mobile_number_input_layout"
             app:layout_constraintStart_toStartOf="@id/mobile_number_input_layout"
             app:layout_constraintTop_toBottomOf="@id/mobile_number_input_layout">
@@ -174,12 +179,13 @@
             android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
             android:hint="@string/resume_form_street_address"
             app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/city_input_layout"
             app:layout_constraintEnd_toEndOf="@id/email_input_layout"
             app:layout_constraintStart_toStartOf="@id/email_input_layout"
             app:layout_constraintTop_toBottomOf="@id/email_input_layout">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/address1_edt"
+                android:id="@+id/address_edt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionNext"
@@ -195,6 +201,7 @@
             android:layout_marginEnd="4dp"
             android:hint="@string/resume_form_city"
             app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/country_input_layout"
             app:layout_constraintEnd_toStartOf="@id/state_input_layout"
             app:layout_constraintStart_toStartOf="@id/address_input_layout"
             app:layout_constraintTop_toBottomOf="@id/address_input_layout">
@@ -215,6 +222,7 @@
             android:layout_marginStart="4dp"
             android:hint="@string/resume_form_state"
             app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="@id/city_input_layout"
             app:layout_constraintEnd_toEndOf="@id/address_input_layout"
             app:layout_constraintStart_toEndOf="@id/city_input_layout"
             app:layout_constraintTop_toTopOf="@id/city_input_layout">
@@ -235,6 +243,7 @@
             android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
             android:hint="@string/resume_form_country"
             app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/career_objective_input_layout"
             app:layout_constraintEnd_toEndOf="@id/city_input_layout"
             app:layout_constraintStart_toStartOf="@id/city_input_layout"
             app:layout_constraintTop_toBottomOf="@id/city_input_layout">
@@ -254,6 +263,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/resume_form_postal_code"
             app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="@id/country_input_layout"
             app:layout_constraintEnd_toEndOf="@id/state_input_layout"
             app:layout_constraintStart_toEndOf="@id/country_input_layout"
             app:layout_constraintStart_toStartOf="@id/state_input_layout"
@@ -270,6 +280,7 @@
 
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/career_objective_icon_imv"
             android:layout_width="@dimen/resume_form_icon_size"
             android:layout_height="@dimen/resume_form_icon_size"
             android:src="@drawable/ic_flag_filled"
@@ -283,6 +294,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
             app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/skills_label_tv"
             app:layout_constraintEnd_toEndOf="@id/postal_code_input_layout"
             app:layout_constraintStart_toStartOf="@id/country_input_layout"
             app:layout_constraintTop_toBottomOf="@id/country_input_layout">
@@ -297,12 +309,14 @@
 
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/skill_icon_imv"
             android:layout_width="@dimen/resume_form_icon_size"
             android:layout_height="@dimen/resume_form_icon_size"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_handyman_filled"
             app:layout_constraintBottom_toBottomOf="@id/skills_label_tv"
+            app:layout_constraintEnd_toStartOf="@id/skills_label_tv"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/skills_label_tv" />
 
@@ -313,6 +327,7 @@
             android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
             android:text="@string/resume_form_skills"
             android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@id/skills_chip_group"
             app:layout_constraintEnd_toEndOf="@id/career_objective_input_layout"
             app:layout_constraintStart_toStartOf="@id/career_objective_input_layout"
             app:layout_constraintTop_toBottomOf="@id/career_objective_input_layout" />
@@ -327,10 +342,10 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/skill_input_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/education_label_tv"
             app:layout_constraintEnd_toEndOf="@id/career_objective_input_layout"
             app:layout_constraintStart_toStartOf="@id/skills_chip_group"
             app:layout_constraintTop_toBottomOf="@id/skills_chip_group">
@@ -339,46 +354,198 @@
                 android:id="@+id/skill_edt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/ic_add_circle_filled" />
+                android:drawableEnd="@drawable/ic_add_circle_filled"
+                android:imeOptions="actionNext"
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_school_filled"
+            app:layout_constraintEnd_toStartOf="@id/education_label_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/education_label_tv" />
 
-        <!--        <com.google.android.material.button.MaterialButton-->
-        <!--            android:id="@+id/add_skill_btn"-->
-        <!--            style="@style/Widget.MaterialComponents.Button.OutlinedButton"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginStart="8dp"-->
-        <!--            android:text="@string/resume_form_add_skill"-->
-        <!--            android:textAllCaps="false"-->
-        <!--            app:layout_constraintBottom_toBottomOf="@id/skill_edt"-->
-        <!--            app:layout_constraintEnd_toEndOf="@id/skills_chip_group"-->
-        <!--            app:layout_constraintStart_toEndOf="@id/skill_edt"-->
-        <!--            app:layout_constraintTop_toTopOf="@id/skill_edt" />-->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/education_label_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/resume_form_educations"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@id/add_education_btn"
+            app:layout_constraintStart_toStartOf="@id/skill_input_layout"
+            app:layout_constraintTop_toBottomOf="@id/skill_input_layout" />
 
-        <!--        <androidx.appcompat.widget.AppCompatImageView-->
-        <!--            android:id="@+id/education_icon_imv"-->
-        <!--            android:layout_width="@dimen/resume_form_icon_size"-->
-        <!--            android:layout_height="@dimen/resume_form_icon_size"-->
-        <!--            android:layout_marginStart="16dp"-->
-        <!--            android:layout_marginEnd="16dp"-->
-        <!--            android:src="@drawable/ic_school_filled"-->
-        <!--            app:layout_constraintEnd_toStartOf="@id/education_label_tv"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/education_label_tv"-->
-        <!--            app:layout_constraintTop_toTopOf="@id/education_label_tv" />-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_education_btn"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            app:layout_constraintBottom_toBottomOf="@id/education_label_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/resume_form_add"
+            app:layout_constraintEnd_toEndOf="@id/skill_input_layout"
+            app:layout_constraintStart_toEndOf="@id/education_label_tv"
+        app:layout_constraintTop_toTopOf="@id/education_label_tv" />
 
-        <!--        -->
-        <!--        <androidx.appcompat.widget.AppCompatTextView-->
-        <!--            android:id="@+id/education_label_tv"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"-->
-        <!--            android:text="Educations"-->
-        <!--            android:textSize="18sp"-->
-        <!--            app:layout_constraintEnd_toEndOf="@id/add_skill_btn"-->
-        <!--            app:layout_constraintStart_toStartOf="@id/skill_edt"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/skill_edt" />-->
+        <LinearLayout
+            android:id="@+id/educations_container_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:showDividers="middle"
+            app:layout_constraintEnd_toEndOf="@id/add_education_btn"
+            app:layout_constraintStart_toStartOf="@id/education_label_tv"
+            app:layout_constraintTop_toBottomOf="@id/add_education_btn">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Asian Institute of Technology (Thailand)"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Master, Computer Science (2019)" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="CGPA: 3.77" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Edit" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Asian Institute of Technology (Thailand)"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Bachelor, Information and Communication Technology, (2016)" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="CGPA: 3.77" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Edit" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/work_experiences_icon_imv"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_work_filled"
+            app:layout_constraintEnd_toStartOf="@id/work_experiences_label_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/work_experiences_label_tv" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/work_experiences_label_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            android:text="@string/resume_form_work_experiences"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@id/add_work_experience_btn"
+            app:layout_constraintStart_toStartOf="@id/educations_container_layout"
+            app:layout_constraintTop_toBottomOf="@id/educations_container_layout" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_work_experience_btn"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/resume_form_add"
+            app:layout_constraintEnd_toEndOf="@id/educations_container_layout"
+            app:layout_constraintStart_toEndOf="@id/education_label_tv"
+            app:layout_constraintBottom_toBottomOf="@id/work_experiences_label_tv"
+            app:layout_constraintTop_toTopOf="@id/work_experiences_label_tv"/>
+
+        <LinearLayout
+            android:id="@+id/work_experiences_container_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:showDividers="middle"
+            app:layout_constraintEnd_toEndOf="@id/add_work_experience_btn"
+            app:layout_constraintStart_toStartOf="@id/work_experiences_label_tv"
+            app:layout_constraintTop_toBottomOf="@id/add_work_experience_btn">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Asian Institute of Technology"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Research Associate" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="August 2019 - Present" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Edit" />
+            </LinearLayout>
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

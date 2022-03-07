@@ -16,6 +16,10 @@
     <string name="resume_form_career_objective">Career Objective</string>
     <string name="resume_form_skills">Skills</string>
     <string name="resume_form_add_skill">Add Skill</string>
+    <string name="resume_form_educations">Educations</string>
+    <string name="resume_form_add_education">Add Education</string>
+    <string name="resume_form_add">Add</string>
+    <string name="resume_form_work_experiences">Work Experiences</string>
 
     <string name="education_form_school_or_college">School/College</string>
     <string name="education_form_degree">Degree</string>

@@ -5,6 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.util.Log
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.chip.Chip
 import me.visutrb.resumegen.databinding.ActivityResumeFormBinding
@@ -25,6 +28,24 @@ class ResumeFormActivity : AppCompatActivity() {
             addTextChangedListener(PhoneNumberFormattingTextWatcher())
         }
 
+        binding.skillEdt.apply {
+            setOnEditorActionListener { view, actionId, event ->
+                if (view.text.isNotEmpty() && actionId == EditorInfo.IME_ACTION_NEXT) {
+                    addSkill()
+                }
+                true
+            }
+            setOnKeyListener { view, keyCode, event ->
+                if ((view as EditText).text.isNotEmpty() && keyCode == KeyEvent.KEYCODE_ENTER) {
+                    addSkill()
+                }
+                true
+            }
+        }
+
+        binding.addEducationBtn.apply {
+            setOnClickListener {  }
+        }
     }
 
     private fun selectOrTakePicture() {
@@ -44,6 +65,9 @@ class ResumeFormActivity : AppCompatActivity() {
             binding.skillsChipGroup.removeView(it)
         }
         binding.skillsChipGroup.addView(chip)
+    }
+
+    private fun launchEducationFormActivity() {
     }
 
     companion object {
