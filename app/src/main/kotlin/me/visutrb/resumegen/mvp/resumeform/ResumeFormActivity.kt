@@ -15,13 +15,20 @@ import com.google.android.material.chip.Chip
 import me.visutrb.resumegen.R
 import me.visutrb.resumegen.databinding.ActivityResumeFormBinding
 import me.visutrb.resumegen.entity.Education
+import me.visutrb.resumegen.entity.Project
+import me.visutrb.resumegen.entity.Resume
 import me.visutrb.resumegen.mvp.Activity
 import me.visutrb.resumegen.mvp.educationform.EducationFormResultContract
+import me.visutrb.resumegen.mvp.projectform.ProjectFormResultContract
 
 class ResumeFormActivity : Activity() {
 
     private lateinit var binding: ActivityResumeFormBinding
-    private lateinit var startEducationFormForResult: ActivityResultLauncher<Education?>
+
+    private lateinit var educationFormResultLauncher: ActivityResultLauncher<Education?>
+    private lateinit var projectFormResultLauncher: ActivityResultLauncher<Project?>
+
+    private var initialResume: Resume? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,40 +36,9 @@ class ResumeFormActivity : Activity() {
         setContentView(binding.root)
 
         setupActionBar()
-
-        startEducationFormForResult =
-            registerForActivityResult(EducationFormResultContract()) { result ->
-                Log.d(TAG, "Received result: $result")
-            }
-
-        binding.profilePictureImv.setOnClickListener {
-            selectOrTakePicture()
-        }
-
-        binding.mobileNumberEdt.apply {
-            addTextChangedListener(PhoneNumberFormattingTextWatcher())
-        }
-
-        binding.skillEdt.apply {
-            setOnEditorActionListener { view, actionId, event ->
-                if (view.text.isNotEmpty() && actionId == EditorInfo.IME_ACTION_NEXT) {
-                    addSkill()
-                }
-                true
-            }
-            setOnKeyListener { view, keyCode, event ->
-                if ((view as EditText).text.isNotEmpty() && keyCode == KeyEvent.KEYCODE_ENTER) {
-                    addSkill()
-                }
-                true
-            }
-        }
-
-        binding.addEducationBtn.apply {
-            setOnClickListener {
-                launchEducationFormActivity()
-            }
-        }
+        setupLaunchers()
+        setupInitialData()
+        setupViews()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -92,6 +68,55 @@ class ResumeFormActivity : Activity() {
         }
     }
 
+    private fun setupLaunchers() {
+        educationFormResultLauncher =
+            registerForActivityResult(EducationFormResultContract()) { education ->
+                Log.d(TAG, "Received education: $education")
+            }
+
+        projectFormResultLauncher =
+            registerForActivityResult(ProjectFormResultContract()) { project ->
+                Log.d(TAG, "Received project: $project")
+            }
+    }
+
+    private fun setupInitialData() {
+
+    }
+
+    private fun setupViews() {
+        binding.profilePictureImv.setOnClickListener {
+            selectOrTakePicture()
+        }
+
+        binding.mobileNumberEdt.apply {
+            addTextChangedListener(PhoneNumberFormattingTextWatcher())
+        }
+
+        binding.skillEdt.apply {
+            setOnEditorActionListener { view, actionId, event ->
+                if (view.text.isNotEmpty() && actionId == EditorInfo.IME_ACTION_NEXT) {
+                    addSkill()
+                }
+                true
+            }
+            setOnKeyListener { view, keyCode, event ->
+                if ((view as EditText).text.isNotEmpty() && keyCode == KeyEvent.KEYCODE_ENTER) {
+                    addSkill()
+                }
+                true
+            }
+        }
+
+        binding.addEducationBtn.apply {
+            setOnClickListener { launchEducationFormActivity() }
+        }
+
+        binding.addProjectBtn.apply {
+            setOnClickListener { launchProjectFormActivity() }
+        }
+    }
+
     private fun selectOrTakePicture() {
         Log.d(TAG, "selectOrTakePicture")
     }
@@ -112,7 +137,11 @@ class ResumeFormActivity : Activity() {
     }
 
     private fun launchEducationFormActivity() {
-        startEducationFormForResult.launch(null)
+        educationFormResultLauncher.launch(null)
+    }
+
+    private fun launchProjectFormActivity() {
+        projectFormResultLauncher.launch(null)
     }
 
     companion object {
