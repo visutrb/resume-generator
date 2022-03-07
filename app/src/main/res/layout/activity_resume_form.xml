@@ -25,6 +25,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintVertical_bias="0"
             tools:src="@tools:sample/avatars" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -279,14 +280,52 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/role_input_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/years_of_exp_input_layout"
+            app:layout_constraintEnd_toEndOf="@id/postal_code_input_layout"
+            app:layout_constraintStart_toStartOf="@id/country_input_layout"
+            app:layout_constraintTop_toBottomOf="@id/country_input_layout">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/role_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/resume_form_role" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/years_of_exp_input_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/career_objective_input_layout"
+            app:layout_constraintEnd_toEndOf="@id/role_input_layout"
+            app:layout_constraintStart_toStartOf="@id/role_input_layout"
+            app:layout_constraintTop_toBottomOf="@id/role_input_layout">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/years_of_exp_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Years of Experience"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/career_objective_icon_imv"
             android:layout_width="@dimen/resume_form_icon_size"
             android:layout_height="@dimen/resume_form_icon_size"
             android:src="@drawable/ic_flag_filled"
-            app:layout_constraintEnd_toStartOf="@id/career_objective_input_layout"
+            app:layout_constraintBottom_toBottomOf="@id/role_input_layout"
+            app:layout_constraintEnd_toStartOf="@id/role_input_layout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/career_objective_input_layout" />
+            app:layout_constraintTop_toTopOf="@id/role_input_layout" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/career_objective_input_layout"
@@ -295,9 +334,9 @@
             android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
             app:boxBackgroundColor="@android:color/transparent"
             app:layout_constraintBottom_toTopOf="@id/skills_label_tv"
-            app:layout_constraintEnd_toEndOf="@id/postal_code_input_layout"
-            app:layout_constraintStart_toStartOf="@id/country_input_layout"
-            app:layout_constraintTop_toBottomOf="@id/country_input_layout">
+            app:layout_constraintEnd_toEndOf="@id/years_of_exp_input_layout"
+            app:layout_constraintStart_toStartOf="@id/years_of_exp_input_layout"
+            app:layout_constraintTop_toBottomOf="@id/years_of_exp_input_layout">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/career_objective_edt"

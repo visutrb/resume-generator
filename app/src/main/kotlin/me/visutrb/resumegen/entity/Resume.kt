@@ -15,6 +15,7 @@ data class Resume(
     var phoneNumber: String = "",
     var emailAddress: String = "",
     @Embedded var address: Address = Address(),
+    var role: String = "",
     var careerObjective: String = "",
     var totalYearsOfExp: Int = -1,
     var createDate: Date = Date(),

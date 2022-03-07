@@ -285,6 +285,8 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
         val state = binding.stateEdt.text.toString()
         val country = binding.countryEdt.text.toString()
         val postalCode = binding.postalCodeEdt.text.toString()
+        val role = binding.roleEdt.text.toString()
+        val yearOfExpStr = binding.yearsOfExpEdt.text.toString()
         val obj = binding.careerObjectiveEdt.text.toString()
 
         if (firstName.isBlank() || firstName.isEmpty()) {
@@ -327,6 +329,16 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
             isValid = false
         }
 
+        if (role.isBlank() || role.isEmpty()) {
+            binding.roleEdt.error = getString(R.string.error_required)
+            isValid = false
+        }
+
+        if (yearOfExpStr.isBlank() || yearOfExpStr.isEmpty()) {
+            binding.yearsOfExpEdt.error = getString(R.string.error_required)
+            isValid = false
+        }
+
         if (obj.isBlank() || obj.isEmpty()) {
             binding.careerObjectiveEdt.error = getString(R.string.error_required)
             isValid = false
@@ -335,6 +347,7 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
         if (!isValid) {
             return
         }
+
 
         resume.let {
             it.firstName = firstName
@@ -347,6 +360,8 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
                 country = country,
                 postalCode = postalCode
             )
+            it.role = role
+            it.totalYearsOfExp = yearOfExpStr.toInt()
             it.careerObjective = obj
         }
 
