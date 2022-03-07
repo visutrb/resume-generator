@@ -42,6 +42,7 @@
     <string name="resume_form_add">Add</string>
     <string name="resume_form_work_experiences">Work Experiences</string>
     <string name="resume_form_role">Role</string>
+    <string name="resume_form_job_title">Job Title</string>
 
     <string name="education_form_title">Education</string>
     <string name="education_form_school_or_college">School/College</string>
