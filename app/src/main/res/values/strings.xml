@@ -40,4 +40,11 @@
         <item>Middle School</item>
         <item>Primary School</item>
     </string-array>
+
+    <string name="project_form_title">Project</string>
+    <string name="project_form_project_name">Project Name</string>
+    <string name="project_form_role">Role</string>
+    <string name="project_form_team_size">Team Size</string>
+    <string name="project_form_summary">Summary</string>
+    <string name="project_form_technologies">Technologies</string>
 </resources>

@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="56dp"
-            android:hint="Project Name"
+            android:hint="@string/project_form_project_name"
             app:boxBackgroundColor="@android:color/transparent"
             app:layout_constraintBottom_toTopOf="@id/role_input_layout"
             app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +63,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
-            android:hint="Role"
+            android:hint="@string/project_form_role"
             app:boxBackgroundColor="@android:color/transparent"
             app:layout_constraintBottom_toTopOf="@id/team_size_input_layout"
             app:layout_constraintEnd_toEndOf="@id/project_name_input_layout"
@@ -93,9 +93,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
-            android:hint="Team Size"
+            android:hint="@string/project_form_team_size"
             app:boxBackgroundColor="@android:color/transparent"
-            app:layout_constraintBottom_toTopOf="@id/input_layout4"
+            app:layout_constraintBottom_toTopOf="@id/summary_input_layout"
             app:layout_constraintEnd_toEndOf="@id/role_input_layout"
             app:layout_constraintStart_toStartOf="@id/role_input_layout"
             app:layout_constraintTop_toBottomOf="@id/role_input_layout">
@@ -112,18 +112,18 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_summarize_filled"
-            app:layout_constraintBottom_toBottomOf="@id/input_layout4"
+            app:layout_constraintBottom_toBottomOf="@id/summary_input_layout"
             app:layout_constraintEnd_toEndOf="@id/team_size_icon_imv"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="@id/team_size_icon_imv"
-            app:layout_constraintTop_toTopOf="@id/input_layout4" />
+            app:layout_constraintTop_toTopOf="@id/summary_input_layout" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_layout4"
+            android:id="@+id/summary_input_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
-            android:hint="Summary"
+            android:hint="@string/project_form_summary"
             app:boxBackgroundColor="@android:color/transparent"
             app:layout_constraintBottom_toTopOf="@id/technologies_tv"
             app:layout_constraintEnd_toEndOf="@id/team_size_input_layout"
@@ -153,12 +153,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Technologies"
+            android:text="@string/project_form_technologies"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@id/technologies_chip_group"
-            app:layout_constraintEnd_toEndOf="@id/input_layout4"
-            app:layout_constraintStart_toStartOf="@id/input_layout4"
-            app:layout_constraintTop_toBottomOf="@id/input_layout4" />
+            app:layout_constraintEnd_toEndOf="@id/summary_input_layout"
+            app:layout_constraintStart_toStartOf="@id/summary_input_layout"
+            app:layout_constraintTop_toBottomOf="@id/summary_input_layout" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/technologies_chip_group"
