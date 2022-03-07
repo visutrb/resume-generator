@@ -17,9 +17,11 @@ import me.visutrb.resumegen.databinding.ActivityResumeFormBinding
 import me.visutrb.resumegen.entity.Education
 import me.visutrb.resumegen.entity.Project
 import me.visutrb.resumegen.entity.Resume
+import me.visutrb.resumegen.entity.WorkExperience
 import me.visutrb.resumegen.mvp.Activity
 import me.visutrb.resumegen.mvp.educationform.EducationFormResultContract
 import me.visutrb.resumegen.mvp.projectform.ProjectFormResultContract
+import me.visutrb.resumegen.mvp.workexpform.WorkExperienceFormResultContract
 
 class ResumeFormActivity : Activity() {
 
@@ -27,6 +29,7 @@ class ResumeFormActivity : Activity() {
 
     private lateinit var educationFormResultLauncher: ActivityResultLauncher<Education?>
     private lateinit var projectFormResultLauncher: ActivityResultLauncher<Project?>
+    private lateinit var workExperienceFormResultLauncher: ActivityResultLauncher<WorkExperience?>
 
     private var initialResume: Resume? = null
 
@@ -78,6 +81,11 @@ class ResumeFormActivity : Activity() {
             registerForActivityResult(ProjectFormResultContract()) { project ->
                 Log.d(TAG, "Received project: $project")
             }
+
+        workExperienceFormResultLauncher =
+            registerForActivityResult(WorkExperienceFormResultContract()) { workExperience ->
+                Log.d(TAG, "Received workExperience: $workExperience")
+            }
     }
 
     private fun setupInitialData() {
@@ -85,13 +93,9 @@ class ResumeFormActivity : Activity() {
     }
 
     private fun setupViews() {
-        binding.profilePictureImv.setOnClickListener {
-            selectOrTakePicture()
-        }
+        binding.profilePictureImv.setOnClickListener { selectOrTakePicture() }
 
-        binding.mobileNumberEdt.apply {
-            addTextChangedListener(PhoneNumberFormattingTextWatcher())
-        }
+        binding.mobileNumberEdt.addTextChangedListener(PhoneNumberFormattingTextWatcher())
 
         binding.skillEdt.apply {
             setOnEditorActionListener { view, actionId, event ->
@@ -108,13 +112,9 @@ class ResumeFormActivity : Activity() {
             }
         }
 
-        binding.addEducationBtn.apply {
-            setOnClickListener { launchEducationFormActivity() }
-        }
-
-        binding.addProjectBtn.apply {
-            setOnClickListener { launchProjectFormActivity() }
-        }
+        binding.addEducationBtn.setOnClickListener { launchEducationFormActivity() }
+        binding.addProjectBtn.setOnClickListener { launchProjectFormActivity() }
+        binding.addWorkExperienceBtn.setOnClickListener { launchWorkExperienceFormActivity() }
     }
 
     private fun selectOrTakePicture() {
@@ -142,6 +142,10 @@ class ResumeFormActivity : Activity() {
 
     private fun launchProjectFormActivity() {
         projectFormResultLauncher.launch(null)
+    }
+
+    private fun launchWorkExperienceFormActivity() {
+        workExperienceFormResultLauncher.launch(null)
     }
 
     companion object {
