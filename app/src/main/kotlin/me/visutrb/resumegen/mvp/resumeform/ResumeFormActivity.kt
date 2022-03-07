@@ -6,19 +6,34 @@ import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.util.Log
 import android.view.KeyEvent
+import android.view.Menu
+import android.view.MenuItem
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.result.ActivityResultLauncher
 import com.google.android.material.chip.Chip
+import me.visutrb.resumegen.R
 import me.visutrb.resumegen.databinding.ActivityResumeFormBinding
+import me.visutrb.resumegen.entity.Education
+import me.visutrb.resumegen.mvp.Activity
+import me.visutrb.resumegen.mvp.educationform.EducationResultContract
 
-class ResumeFormActivity : AppCompatActivity() {
+class ResumeFormActivity : Activity() {
+
     private lateinit var binding: ActivityResumeFormBinding
+    private lateinit var startEducationFormForResult: ActivityResultLauncher<Education?>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResumeFormBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setupActionBar()
+
+        startEducationFormForResult =
+            registerForActivityResult(EducationResultContract()) { result ->
+                Log.d(TAG, "Received result: $result")
+            }
 
         binding.profilePictureImv.setOnClickListener {
             selectOrTakePicture()
@@ -44,7 +59,36 @@ class ResumeFormActivity : AppCompatActivity() {
         }
 
         binding.addEducationBtn.apply {
-            setOnClickListener {  }
+            setOnClickListener {
+                launchEducationFormActivity()
+            }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_form, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_form_save -> {
+                true
+            }
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun setupActionBar() {
+        supportActionBar?.let {
+            it.title = getString(R.string.resume_form_title)
+            it.setDisplayHomeAsUpEnabled(true)
+            it.setHomeAsUpIndicator(R.drawable.ic_close_filled)
         }
     }
 
@@ -68,6 +112,7 @@ class ResumeFormActivity : AppCompatActivity() {
     }
 
     private fun launchEducationFormActivity() {
+        startEducationFormForResult.launch(null)
     }
 
     companion object {
