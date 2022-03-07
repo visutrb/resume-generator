@@ -13,5 +13,5 @@ data class Project(
     val teamSize: Int,
     val summary: String,
     val role: String,
-    val resumeId: Long
+    val resumeId: Long = 0
 ) : Parcelable
