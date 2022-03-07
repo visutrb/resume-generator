@@ -383,13 +383,13 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/add_education_btn"
             style="@style/Widget.MaterialComponents.Button.TextButton"
-            app:layout_constraintBottom_toBottomOf="@id/education_label_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/resume_form_add"
+            app:layout_constraintBottom_toBottomOf="@id/education_label_tv"
             app:layout_constraintEnd_toEndOf="@id/skill_input_layout"
             app:layout_constraintStart_toEndOf="@id/education_label_tv"
-        app:layout_constraintTop_toTopOf="@id/education_label_tv" />
+            app:layout_constraintTop_toTopOf="@id/education_label_tv" />
 
         <LinearLayout
             android:id="@+id/educations_container_layout"
@@ -417,7 +417,6 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
                     android:text="Master, Computer Science (2019)" />
 
                 <TextView
@@ -451,7 +450,6 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
                     android:text="Bachelor, Information and Communication Technology, (2016)" />
 
                 <TextView
@@ -498,10 +496,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/resume_form_add"
+            app:layout_constraintBottom_toBottomOf="@id/work_experiences_label_tv"
             app:layout_constraintEnd_toEndOf="@id/educations_container_layout"
             app:layout_constraintStart_toEndOf="@id/education_label_tv"
-            app:layout_constraintBottom_toBottomOf="@id/work_experiences_label_tv"
-            app:layout_constraintTop_toTopOf="@id/work_experiences_label_tv"/>
+            app:layout_constraintTop_toTopOf="@id/work_experiences_label_tv" />
 
         <LinearLayout
             android:id="@+id/work_experiences_container_layout"
@@ -529,7 +527,6 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
                     android:text="Research Associate" />
 
                 <TextView
@@ -537,6 +534,87 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="August 2019 - Present" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Edit" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/projects_icon_imv"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_inventory_filled"
+            app:layout_constraintEnd_toStartOf="@id/projects_label_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/projects_label_tv" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/projects_label_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            android:text="Projects"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@id/add_project_btn"
+            app:layout_constraintStart_toStartOf="@id/work_experiences_container_layout"
+            app:layout_constraintTop_toBottomOf="@id/work_experiences_container_layout" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_project_btn"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/resume_form_add"
+            app:layout_constraintBottom_toBottomOf="@id/projects_label_tv"
+            app:layout_constraintEnd_toEndOf="@id/work_experiences_container_layout"
+            app:layout_constraintStart_toEndOf="@id/projects_label_tv"
+            app:layout_constraintTop_toTopOf="@id/projects_label_tv" />
+
+        <LinearLayout
+            android:id="@+id/projects_container_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="@id/add_project_btn"
+            app:layout_constraintStart_toStartOf="@id/projects_label_tv"
+            app:layout_constraintTop_toBottomOf="@id/add_project_btn">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Awesome Project"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Team Size: 10" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Role: Developer" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Lorem ipsum" />
 
                 <com.google.android.material.button.MaterialButton
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
