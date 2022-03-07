@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ResumeGenerator">
         <activity
+            android:name=".mvp.projectform.ProjectFormActivity"
+            android:exported="false" />
+        <activity
             android:name=".mvp.workexpform.WorkExperienceFormActivity"
             android:exported="false" />
         <activity

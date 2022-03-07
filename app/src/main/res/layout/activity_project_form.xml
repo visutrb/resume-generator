@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".mvp.projectform.ProjectFormActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:id="@+id/project_icon_imv"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_inventory_filled"
+            app:layout_constraintBottom_toBottomOf="@id/project_name_input_layout"
+            app:layout_constraintEnd_toStartOf="@id/project_name_input_layout"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/project_name_input_layout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/project_name_input_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="56dp"
+            android:hint="Project Name"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/role_input_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/project_icon_imv"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintVertical_chainStyle="packed">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/project_name_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/role_icon_imv"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_handyman_filled"
+            app:layout_constraintBottom_toBottomOf="@id/role_input_layout"
+            app:layout_constraintEnd_toEndOf="@id/project_icon_imv"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/project_icon_imv"
+            app:layout_constraintTop_toTopOf="@id/role_input_layout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/role_input_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            android:hint="Role"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/team_size_input_layout"
+            app:layout_constraintEnd_toEndOf="@id/project_name_input_layout"
+            app:layout_constraintStart_toStartOf="@id/project_name_input_layout"
+            app:layout_constraintTop_toBottomOf="@id/project_name_input_layout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/role_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/team_size_icon_imv"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_square_foot_filled"
+            app:layout_constraintBottom_toBottomOf="@id/team_size_input_layout"
+            app:layout_constraintEnd_toEndOf="@id/role_icon_imv"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/role_icon_imv"
+            app:layout_constraintTop_toTopOf="@id/team_size_input_layout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/team_size_input_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            android:hint="Team Size"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/input_layout4"
+            app:layout_constraintEnd_toEndOf="@id/role_input_layout"
+            app:layout_constraintStart_toStartOf="@id/role_input_layout"
+            app:layout_constraintTop_toBottomOf="@id/role_input_layout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/team_size_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/summary_icon_imv"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_summarize_filled"
+            app:layout_constraintBottom_toBottomOf="@id/input_layout4"
+            app:layout_constraintEnd_toEndOf="@id/team_size_icon_imv"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/team_size_icon_imv"
+            app:layout_constraintTop_toTopOf="@id/input_layout4" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_layout4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            android:hint="Summary"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/technologies_tv"
+            app:layout_constraintEnd_toEndOf="@id/team_size_input_layout"
+            app:layout_constraintStart_toStartOf="@id/team_size_input_layout"
+            app:layout_constraintTop_toBottomOf="@id/team_size_input_layout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/summary_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="4" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/technologies_icon_imv"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_tips_and_updates_filled"
+            app:layout_constraintBottom_toBottomOf="@id/technologies_tv"
+            app:layout_constraintEnd_toEndOf="@id/summary_icon_imv"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/summary_icon_imv"
+            app:layout_constraintTop_toTopOf="@id/technologies_tv" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/technologies_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Technologies"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@id/technologies_chip_group"
+            app:layout_constraintEnd_toEndOf="@id/input_layout4"
+            app:layout_constraintStart_toStartOf="@id/input_layout4"
+            app:layout_constraintTop_toBottomOf="@id/input_layout4" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/technologies_chip_group"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/technologies_input_layout"
+            app:layout_constraintEnd_toEndOf="@id/technologies_tv"
+            app:layout_constraintStart_toStartOf="@id/technologies_tv"
+            app:layout_constraintTop_toBottomOf="@id/technologies_tv" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/technologies_input_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/technologies_chip_group"
+            app:layout_constraintStart_toStartOf="@id/technologies_chip_group"
+            app:layout_constraintTop_toBottomOf="@id/technologies_chip_group">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/technology_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_add_circle_filled"
+                android:imeOptions="actionNext"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
