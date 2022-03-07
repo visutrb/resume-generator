@@ -16,7 +16,7 @@ import me.visutrb.resumegen.R
 import me.visutrb.resumegen.databinding.ActivityResumeFormBinding
 import me.visutrb.resumegen.entity.Education
 import me.visutrb.resumegen.mvp.Activity
-import me.visutrb.resumegen.mvp.educationform.EducationResultContract
+import me.visutrb.resumegen.mvp.educationform.EducationFormResultContract
 
 class ResumeFormActivity : Activity() {
 
@@ -31,7 +31,7 @@ class ResumeFormActivity : Activity() {
         setupActionBar()
 
         startEducationFormForResult =
-            registerForActivityResult(EducationResultContract()) { result ->
+            registerForActivityResult(EducationFormResultContract()) { result ->
                 Log.d(TAG, "Received result: $result")
             }
 

@@ -6,7 +6,7 @@ import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContract
 import me.visutrb.resumegen.entity.Education
 
-class EducationResultContract : ActivityResultContract<Education?, Education?>() {
+class EducationFormResultContract : ActivityResultContract<Education?, Education?>() {
 
     override fun createIntent(context: Context, input: Education?): Intent {
         return EducationFormActivity.newIntent(context, input)
