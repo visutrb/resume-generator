@@ -1,5 +1,7 @@
 package me.visutrb.resumegen.mvp.projectform
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
@@ -7,6 +9,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.chip.Chip
 import me.visutrb.resumegen.databinding.ActivityProjectFormBinding
+import me.visutrb.resumegen.entity.Project
 
 class ProjectFormActivity : AppCompatActivity() {
 
@@ -48,5 +51,15 @@ class ProjectFormActivity : AppCompatActivity() {
             }
         }
         binding.technologiesChipGroup.addView(chip)
+    }
+
+    companion object {
+        const val EXTRA_PROJECT = "extra_project"
+
+        fun newIntent(context: Context, project: Project?): Intent {
+            return Intent(context, ProjectFormActivity::class.java).apply {
+                putExtra(EXTRA_PROJECT, project)
+            }
+        }
     }
 }
