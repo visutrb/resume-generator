@@ -4,6 +4,6 @@
     <item
         android:id="@+id/menu_form_save"
         android:icon="@drawable/ic_check_filled"
-        android:title="@string/education_form_menu_save"
+        android:title="@string/form_menu_save"
         app:showAsAction="always"/>
 </menu>
