@@ -182,6 +182,4 @@
             app:layout_constraintTop_toBottomOf="@id/end_month_input_layout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </ScrollView>
