@@ -8,11 +8,11 @@ import kotlinx.parcelize.Parcelize
 @Entity
 @Parcelize
 data class Education(
-    @PrimaryKey val id: Long = 0,
-    val school: String,
-    val degree: String,
-    val fos: String,
-    val graduateYear: Int,
-    val cgpa: Float,
-    val resumeId: Long = 0
+    @PrimaryKey(autoGenerate = true) var id: Int = 0,
+    var school: String,
+    var degree: String,
+    var fos: String,
+    var graduateYear: Int,
+    var cgpa: Float,
+    var resumeId: Int = 0
 ) : Parcelable

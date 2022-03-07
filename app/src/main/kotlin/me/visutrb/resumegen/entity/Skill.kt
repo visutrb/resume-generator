@@ -1,11 +1,10 @@
 package me.visutrb.resumegen.entity
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity
+//@Entity
 data class Skill(
-    @PrimaryKey val id: Int,
-    val name: String,
-    val resumeId: Int
-)
+//    @PrimaryKey(autoGenerate = true) var id: Int = 0,
+    var name: String = "",
+//    var resumeId: Int = 0
+) {
+
+}

@@ -1,6 +1,7 @@
 package me.visutrb.resumegen.mvp.resumelist
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import me.visutrb.resumegen.databinding.ActivityResumeListBinding
@@ -41,6 +42,7 @@ class ResumeListActivity : Activity(), ResumeListPresenter.View {
     }
 
     override fun renderResumes(resumes: List<Resume>) {
+        Log.d(TAG, "resumes: $resumes")
         recyclerViewAdapter.addAll(resumes)
     }
 
@@ -49,4 +51,7 @@ class ResumeListActivity : Activity(), ResumeListPresenter.View {
         startActivity(intent)
     }
 
+    companion object {
+        private const val TAG = "ResumeListActivity"
+    }
 }

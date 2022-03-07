@@ -8,12 +8,12 @@ import kotlinx.parcelize.Parcelize
 @Entity
 @Parcelize
 data class WorkExperience(
-    @PrimaryKey val id: Long = 0,
-    val companyName: String,
-    val role: String,
-    val startMonth: Int,
-    val startYear: Int,
-    val endMonth: Int = -1,
-    val endYear: Int = -1,
-    val resumeId: Long = 0
+    @PrimaryKey var id: Int = 0,
+    var companyName: String,
+    var role: String,
+    var startMonth: Int,
+    var startYear: Int,
+    var endMonth: Int = -1,
+    var endYear: Int = -1,
+    var resumeId: Int = 0
 ) : Parcelable

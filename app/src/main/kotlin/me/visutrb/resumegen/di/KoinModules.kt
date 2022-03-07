@@ -14,8 +14,8 @@ val databaseModule = module {
     factory { get<AppDatabase>().educationDao() }
     factory { get<AppDatabase>().projectDao() }
     factory { get<AppDatabase>().resumeDao() }
-    factory { get<AppDatabase>().skillDao() }
-    factory { get<AppDatabase>().technologyDao() }
+//    factory { get<AppDatabase>().skillDao() }
+//    factory { get<AppDatabase>().technologyDao() }
     factory { get<AppDatabase>().workExperienceDao() }
 }
 

@@ -13,12 +13,14 @@ import com.google.android.material.chip.Chip
 import me.visutrb.resumegen.R
 import me.visutrb.resumegen.databinding.ActivityProjectFormBinding
 import me.visutrb.resumegen.entity.Project
+import me.visutrb.resumegen.entity.TechnologiesHolder
+import me.visutrb.resumegen.entity.Technology
 
 class ProjectFormActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProjectFormBinding
 
-    private var initialProject: Project? = null
+    private lateinit var project: Project
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +40,10 @@ class ProjectFormActivity : AppCompatActivity() {
             setOnKeyListener { view, keyCode, event ->
                 if ((view as EditText).text.isNotEmpty() && keyCode == KeyEvent.KEYCODE_ENTER) {
                     addTechnology()
+                    true
+                } else {
+                    false
                 }
-                true
             }
         }
     }
@@ -73,29 +77,38 @@ class ProjectFormActivity : AppCompatActivity() {
     }
 
     private fun setupInitialData() {
-        if (!intent.hasExtra(EXTRA_PROJECT)) {
-            return
-        }
-        initialProject = intent.getParcelableExtra(EXTRA_PROJECT)
-        initialProject?.let {
+        project = intent.getParcelableExtra(EXTRA_PROJECT) ?: Project()
+        project.let {
             binding.projectNameEdt.setText(it.name)
             binding.roleEdt.setText(it.role)
-            binding.teamSizeEdt.setText(it.teamSize.toString())
+            if (it.teamSize != 0) {
+                binding.teamSizeEdt.setText(it.teamSize.toString())
+            }
             binding.summaryEdt.setText(it.summary)
         }
+        project.technologiesHolder.technologies.forEach { addChip(it) }
     }
 
     private fun addTechnology() {
-        val technology = binding.technologyEdt.text.toString()
-        if (technology.isBlank()) {
+        val technologyName = binding.technologyEdt.text.toString()
+        if (technologyName.isBlank()) {
             return
         }
 
         binding.technologyEdt.setText("")
+
+        val technology = Technology(technologyName)
+        project.technologiesHolder.technologies.add(technology)
+
+        addChip(technology)
+    }
+
+    private fun addChip(technology: Technology) {
         val chip = Chip(this).apply {
-            text = technology
+            text = technology.name
             isCloseIconVisible = true
             setOnCloseIconClickListener {
+                project.technologiesHolder.technologies.remove(technology)
                 binding.technologiesChipGroup.removeView(it)
             }
         }
@@ -135,18 +148,12 @@ class ProjectFormActivity : AppCompatActivity() {
 
         val teamSize = teamSizeStr.toInt()
 
-        val project = initialProject?.copy(
-            name = projectName,
-            role = role,
-            teamSize = teamSize,
-            summary = summary
-
-        ) ?: Project(
-            name = projectName,
-            role = role,
-            teamSize = teamSize,
-            summary = summary
-        )
+        project.let {
+            it.name = projectName
+            it.role = role
+            it.teamSize = teamSize
+            it.summary = summary
+        }
 
         val intent = Intent().apply {
             putExtra(EXTRA_PROJECT, project)

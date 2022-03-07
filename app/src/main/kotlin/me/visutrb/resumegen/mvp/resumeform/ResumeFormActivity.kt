@@ -12,16 +12,18 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.activity.result.ActivityResultLauncher
 import com.google.android.material.chip.Chip
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import me.visutrb.resumegen.R
 import me.visutrb.resumegen.databinding.ActivityResumeFormBinding
-import me.visutrb.resumegen.entity.Education
-import me.visutrb.resumegen.entity.Project
-import me.visutrb.resumegen.entity.Resume
-import me.visutrb.resumegen.entity.WorkExperience
+import me.visutrb.resumegen.db.dao.ResumeDao
+import me.visutrb.resumegen.entity.*
 import me.visutrb.resumegen.mvp.Activity
 import me.visutrb.resumegen.mvp.educationform.EducationFormResultContract
 import me.visutrb.resumegen.mvp.projectform.ProjectFormResultContract
 import me.visutrb.resumegen.mvp.workexpform.WorkExperienceFormResultContract
+import org.koin.android.ext.android.inject
 
 class ResumeFormActivity : Activity() {
 
@@ -31,7 +33,13 @@ class ResumeFormActivity : Activity() {
     private lateinit var projectFormResultLauncher: ActivityResultLauncher<Project?>
     private lateinit var workExperienceFormResultLauncher: ActivityResultLauncher<WorkExperience?>
 
-    private var initialResume: Resume? = null
+    private lateinit var resume: Resume
+
+    private var educations = mutableListOf<Education>()
+    private var workExperiences = mutableListOf<WorkExperience>()
+    private var projects = mutableListOf<Project>()
+
+    private val resumeDao: ResumeDao by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +61,7 @@ class ResumeFormActivity : Activity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_form_save -> {
+                validateAndSaveResult()
                 true
             }
             android.R.id.home -> {
@@ -89,7 +98,21 @@ class ResumeFormActivity : Activity() {
     }
 
     private fun setupInitialData() {
+        resume = intent.getParcelableExtra(EXTRA_RESUME) ?: Resume()
+        resume.let {
+            binding.firstNameEdt.setText(it.firstName)
+            binding.lastNameEdt.setText(it.lastName)
+            binding.mobileNumberEdt.setText(it.phoneNumber)
+            binding.emailEdt.setText(it.emailAddress)
+            binding.addressEdt.setText(it.address.street)
+            binding.cityEdt.setText(it.address.city)
+            binding.stateEdt.setText(it.address.state)
+            binding.countryEdt.setText(it.address.country)
+            binding.postalCodeEdt.setText(it.address.postalCode)
+            binding.careerObjectiveEdt.setText(it.careerObjective)
+        }
 
+        resume.skillsHolder.skills.forEach { }
     }
 
     private fun setupViews() {
@@ -107,8 +130,10 @@ class ResumeFormActivity : Activity() {
             setOnKeyListener { view, keyCode, event ->
                 if ((view as EditText).text.isNotEmpty() && keyCode == KeyEvent.KEYCODE_ENTER) {
                     addSkill()
+                    true
+                } else {
+                    false
                 }
-                true
             }
         }
 
@@ -122,16 +147,24 @@ class ResumeFormActivity : Activity() {
     }
 
     private fun addSkill() {
-        val skill = binding.skillEdt.text.toString()
-        if (skill.isBlank()) {
+        val skillName = binding.skillEdt.text.toString()
+        if (skillName.isBlank()) {
             return
         }
         binding.skillEdt.setText("")
-        val chip = Chip(this)
-        chip.text = skill
-        chip.isCloseIconVisible = true
-        chip.setOnCloseIconClickListener {
-            binding.skillsChipGroup.removeView(it)
+        val skill = Skill(name = skillName)
+        resume.skillsHolder.skills.add(skill)
+        addSkillChip(skill)
+    }
+
+    private fun addSkillChip(skill: Skill) {
+        val chip = Chip(this).apply {
+            text = skill.name
+            isCloseIconVisible = true
+            setOnCloseIconClickListener {
+                resume.skillsHolder.skills.remove(skill)
+                binding.skillsChipGroup.removeView(it)
+            }
         }
         binding.skillsChipGroup.addView(chip)
     }
@@ -148,8 +181,60 @@ class ResumeFormActivity : Activity() {
         workExperienceFormResultLauncher.launch(null)
     }
 
+    private fun validateAndSaveResult() {
+        var isValid = true
+
+        val firstName = binding.firstNameEdt.text.toString()
+        val lastName = binding.lastNameEdt.text.toString()
+        val mobile = binding.mobileNumberEdt.text.toString()
+        val street = binding.addressEdt.text.toString()
+        val city = binding.cityEdt.text.toString()
+        val obj = binding.careerObjectiveEdt.text.toString()
+
+        if (firstName.isBlank() || firstName.isEmpty()) {
+            binding.firstNameEdt.error = getString(R.string.error_required)
+            isValid = false
+        }
+
+        if (lastName.isBlank() || lastName.isEmpty()) {
+            binding.lastNameEdt.error = getString(R.string.error_required)
+            isValid = false
+        }
+
+        if (mobile.isBlank() || mobile.isEmpty()) {
+            binding.mobileNumberEdt.error = getString(R.string.error_required)
+            isValid = false
+        }
+
+        if (street.isBlank() || street.isEmpty()) {
+            binding.addressEdt.error = getString(R.string.error_required)
+            isValid = false
+        }
+
+        if (city.isBlank() || city.isEmpty()) {
+            binding.cityEdt.error = getString(R.string.error_required)
+            isValid = false
+        }
+
+        if (obj.isBlank() || obj.isEmpty()) {
+            binding.careerObjectiveEdt.error = getString(R.string.error_required)
+            isValid = false
+        }
+
+        if (!isValid) {
+            return
+        }
+
+        launch {
+            withContext(Dispatchers.IO) { resumeDao.insert(resume) }
+        }
+    }
+
     companion object {
         private const val TAG = "ResumeFormActivity"
+
+        const val EXTRA_RESUME = "extra_resume"
+
         fun newIntent(context: Context): Intent = Intent(context, ResumeFormActivity::class.java)
     }
 }

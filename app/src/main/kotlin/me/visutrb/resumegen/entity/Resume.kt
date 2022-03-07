@@ -7,18 +7,19 @@ import java.util.*
 
 @Entity
 data class Resume(
-    @PrimaryKey val id: Int,
-    val firstName: String,
-    val middleName: String? = null,
-    val lastName: String,
-    val profilePicturePath: String,
-    val phoneNumber: String,
-    val emailAddress: String,
-    @Embedded val address: Address,
-    val careerObjective: String,
-    val totalYearsOfExp: Int,
-    val createDate: Date = Date(),
-    val updateDate: Date = Date()
+    @PrimaryKey(autoGenerate = true) var id: Int = 0,
+    var firstName: String = "",
+    var middleName: String? = null,
+    var lastName: String = "",
+    var profilePicturePath: String = "",
+    var phoneNumber: String = "",
+    var emailAddress: String = "",
+    @Embedded var address: Address = Address(),
+    var careerObjective: String = "",
+    var totalYearsOfExp: Int = -1,
+    var createDate: Date = Date(),
+    var updateDate: Date = Date(),
+    @Embedded var skillsHolder: SkillsHolder = SkillsHolder()
 ) {
 
     val fullName: String
