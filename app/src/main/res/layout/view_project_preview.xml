@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
+
+
+    <TextView
+        android:id="@+id/project_name_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        tools:text="Awesome Project" />
+
+    <TextView
+        android:id="@+id/team_size_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Team Size: 10" />
+
+    <TextView
+        android:id="@+id/role_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Role: Developer" />
+
+    <TextView
+        android:id="@+id/summary_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        tools:text="Lorem ipsum" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/technologies_chip_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/edit_btn"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Edit" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/delete_btn"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:textColor="@android:color/holo_red_dark" />
+</LinearLayout>

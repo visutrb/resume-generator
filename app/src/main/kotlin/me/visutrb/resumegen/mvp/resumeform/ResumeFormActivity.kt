@@ -89,7 +89,7 @@ class ResumeFormActivity : Activity() {
 
         projectFormResultLauncher =
             registerForActivityResult(ProjectFormResultContract()) { project ->
-                Log.d(TAG, "Received project: $project")
+                project?.let { addOrUpdateProject(project) }
             }
 
         workExperienceFormResultLauncher =
@@ -218,12 +218,36 @@ class ResumeFormActivity : Activity() {
         binding.workExperiencesContainerLayout.addView(preview)
     }
 
+    private fun addOrUpdateProject(project: Project) {
+        val idx = projects.indexOfFirst { it.uuid == project.uuid }
+        if (idx != -1) {
+            projects[idx] = project
+            binding.projectsContainerLayout.children.find {
+                (it as ProjectPreviewView).project?.uuid == project.uuid
+            }?.let {
+                (it as ProjectPreviewView).project = project
+            }
+            return
+        }
+
+        projects.add(project)
+        val preview = ProjectPreviewView(this).apply {
+            this.project = project
+            onEditProject = { launchProjectFormActivity(it) }
+            onDeleteProject = {
+                projects.remove(project)
+                binding.projectsContainerLayout.removeView(this)
+            }
+        }
+        binding.projectsContainerLayout.addView(preview)
+    }
+
     private fun launchEducationFormActivity(education: Education? = null) {
         educationFormResultLauncher.launch(education)
     }
 
-    private fun launchProjectFormActivity() {
-        projectFormResultLauncher.launch(null)
+    private fun launchProjectFormActivity(project: Project? = null) {
+        projectFormResultLauncher.launch(project)
     }
 
     private fun launchWorkExperienceFormActivity(workExperience: WorkExperience? = null) {
