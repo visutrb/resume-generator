@@ -11,6 +11,7 @@ import android.view.MenuItem
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.activity.result.ActivityResultLauncher
+import androidx.core.view.children
 import com.google.android.material.chip.Chip
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -83,7 +84,7 @@ class ResumeFormActivity : Activity() {
     private fun setupLaunchers() {
         educationFormResultLauncher =
             registerForActivityResult(EducationFormResultContract()) { education ->
-                Log.d(TAG, "Received education: $education")
+                education?.let { addOrUpdateEducation(it) }
             }
 
         projectFormResultLauncher =
@@ -146,6 +147,30 @@ class ResumeFormActivity : Activity() {
         Log.d(TAG, "selectOrTakePicture")
     }
 
+    private fun addOrUpdateEducation(education: Education) {
+        val idx = educations.indexOfFirst { it.uuid == education.uuid }
+        if (idx != -1) {
+            educations[idx] = education
+            binding.educationsContainerLayout.children.find {
+                (it as EducationPreviewView).education?.uuid == education.uuid
+            }?.let {
+                (it as EducationPreviewView).education = education
+            }
+            return
+        }
+
+        educations.add(education)
+        val preview = EducationPreviewView(this).apply {
+            this.education = education
+            onEditEducation = { launchEducationFormActivity(it) }
+            onDeleteEducation = {
+                educations.remove(education)
+                binding.educationsContainerLayout.removeView(this)
+            }
+        }
+        binding.educationsContainerLayout.addView(preview)
+    }
+
     private fun addSkill() {
         val skillName = binding.skillEdt.text.toString()
         if (skillName.isBlank()) {
@@ -169,8 +194,8 @@ class ResumeFormActivity : Activity() {
         binding.skillsChipGroup.addView(chip)
     }
 
-    private fun launchEducationFormActivity() {
-        educationFormResultLauncher.launch(null)
+    private fun launchEducationFormActivity(education: Education? = null) {
+        educationFormResultLauncher.launch(education)
     }
 
     private fun launchProjectFormActivity() {
