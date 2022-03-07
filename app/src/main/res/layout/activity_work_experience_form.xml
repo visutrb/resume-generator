@@ -32,9 +32,11 @@
             android:layout_marginEnd="56dp"
             android:hint="Company"
             app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/role_input_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/company_icon_imv"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/company_edt"
@@ -61,6 +63,7 @@
             android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
             android:hint="Role"
             app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/start_month_input_layout"
             app:layout_constraintEnd_toEndOf="@id/company_input_layout"
             app:layout_constraintStart_toStartOf="@id/company_input_layout"
             app:layout_constraintTop_toBottomOf="@id/company_input_layout">
@@ -90,6 +93,7 @@
             android:layout_marginEnd="8dp"
             android:hint="From"
             app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/end_month_input_layout"
             app:layout_constraintEnd_toStartOf="@id/start_year_input_layout"
             app:layout_constraintStart_toStartOf="@id/role_input_layout"
             app:layout_constraintTop_toBottomOf="@id/role_input_layout">
@@ -137,6 +141,7 @@
             android:layout_marginEnd="8dp"
             android:hint="To"
             app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/working_cb"
             app:layout_constraintEnd_toStartOf="@id/end_year_input_layout"
             app:layout_constraintStart_toStartOf="@id/start_month_input_layout"
             app:layout_constraintTop_toBottomOf="@id/start_month_input_layout">
@@ -166,13 +171,15 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/working_cb"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
             android:hint="Currently working here"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/end_year_input_layout"
             app:layout_constraintStart_toStartOf="@id/end_month_input_layout"
-            app:layout_constraintTop_toBottomOf="@id/end_year_input_layout" />
+            app:layout_constraintTop_toBottomOf="@id/end_month_input_layout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
