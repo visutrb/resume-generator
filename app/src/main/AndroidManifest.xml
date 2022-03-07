@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ResumeGenerator">
         <activity
+            android:name=".mvp.educationform.EducationFormActivity"
+            android:exported="false" />
+        <activity
             android:name=".mvp.resumeform.ResumeFormActivity"
             android:exported="false" />
         <activity

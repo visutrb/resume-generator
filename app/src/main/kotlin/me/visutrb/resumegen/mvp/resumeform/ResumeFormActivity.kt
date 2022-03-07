@@ -25,9 +25,6 @@ class ResumeFormActivity : AppCompatActivity() {
             addTextChangedListener(PhoneNumberFormattingTextWatcher())
         }
 
-        binding.addSkillBtn.apply {
-            setOnClickListener { addSkill() }
-        }
     }
 
     private fun selectOrTakePicture() {
