@@ -20,6 +20,7 @@ class ResumeListRecyclerViewAdapter :
         val resume = resumes[position]
         with(holder) {
             binding.nameTv.text = resume.fullName
+            binding.jobTitleTv.text = resume.role
         }
     }
 
