@@ -1,8 +1,10 @@
 package me.visutrb.resumegen.mvp.resumeform
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Environment
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,7 +32,6 @@ class ResumeFormPresenter(
     var currentImageFile: File? = null
         private set
 
-
     private val deletedEducations = mutableListOf<Education>()
     private val deletedWorkExperiences = mutableListOf<WorkExperience>()
     private val deletedProjects = mutableListOf<Project>()
@@ -56,6 +57,11 @@ class ResumeFormPresenter(
         } catch (e: Exception) {
             view?.onLoadRelatedDataFailed(e)
         }
+    }
+
+    fun isPermissionGranted(context: Context, permission: String): Boolean {
+        val grantStatus = ContextCompat.checkSelfPermission(context, permission)
+        return grantStatus == PackageManager.PERMISSION_GRANTED
     }
 
     fun saveData(
@@ -130,8 +136,6 @@ class ResumeFormPresenter(
             educationDao.updateAll(oldEducations)
             educationDao.insertAll(newEducations)
 
-            println("oldWorkExperiences: $oldWorkExperiences")
-            println("newWorkExperiences: $newWorkExperiences")
             workExperienceDao.updateAll(oldWorkExperiences)
             workExperienceDao.insertAll(newWorkExperiences)
 

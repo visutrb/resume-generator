@@ -4,8 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import me.visutrb.resumegen.R
 import me.visutrb.resumegen.databinding.ViewEducationPreviewBinding
 import me.visutrb.resumegen.entity.Education
+import java.util.*
 
 class EducationPreviewView : FrameLayout {
 
@@ -39,8 +41,9 @@ class EducationPreviewView : FrameLayout {
     private fun updateViews() {
         education?.let {
             binding.schoolTv.text = it.school
-            binding.fosTv.text = "${it.degree}, ${it.fos} (${it.graduateYear})"
-            binding.cgpaTv.text = "CGPA: ${it.cgpa}"
+            binding.fosTv.text =
+                resources.getString(R.string.education_preview_fos, it.degree, it.fos, it.graduateYear)
+            binding.cgpaTv.text = resources.getString(R.string.education_preview_cgpa, it.cgpa)
         }
     }
 
