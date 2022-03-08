@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".mvp.educationform.EducationFormActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/school_icon_imv"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_school_filled"
+            app:layout_constraintBottom_toBottomOf="@id/school_input_layout"
+            app:layout_constraintEnd_toStartOf="@id/school_input_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/school_input_layout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/school_input_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="56dp"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/degree_input_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/school_icon_imv"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintVertical_bias="0">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/school_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/education_form_school_or_college"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/degree_icon_imv"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_workspace_premium_filled"
+            app:layout_constraintBottom_toBottomOf="@id/degree_input_layout"
+            app:layout_constraintEnd_toEndOf="@id/school_icon_imv"
+            app:layout_constraintStart_toStartOf="@id/school_icon_imv"
+            app:layout_constraintTop_toTopOf="@id/degree_input_layout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/degree_input_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            android:hint="@string/education_form_degree"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/fos_input_layout"
+            app:layout_constraintEnd_toEndOf="@id/school_input_layout"
+            app:layout_constraintStart_toStartOf="@id/school_input_layout"
+            app:layout_constraintTop_toBottomOf="@id/school_input_layout">
+
+            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                android:id="@+id/degree_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/fos_icon_imv"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_menu_book_filled"
+            app:layout_constraintBottom_toBottomOf="@id/fos_input_layout"
+            app:layout_constraintEnd_toEndOf="@id/degree_icon_imv"
+            app:layout_constraintStart_toStartOf="@id/degree_icon_imv"
+            app:layout_constraintTop_toTopOf="@id/fos_input_layout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fos_input_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            android:hint="@string/education_form_fos"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/grade_input_layout"
+            app:layout_constraintEnd_toEndOf="@id/degree_input_layout"
+            app:layout_constraintStart_toStartOf="@id/degree_input_layout"
+            app:layout_constraintTop_toBottomOf="@id/degree_input_layout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fos_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/grade_icon_imv"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_fact_check_filled"
+            app:layout_constraintBottom_toBottomOf="@id/grade_input_layout"
+            app:layout_constraintEnd_toEndOf="@id/fos_icon_imv"
+            app:layout_constraintStart_toStartOf="@id/fos_icon_imv"
+            app:layout_constraintTop_toTopOf="@id/grade_input_layout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/grade_input_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/graduate_year_input_layout"
+            app:layout_constraintEnd_toEndOf="@id/fos_input_layout"
+            app:layout_constraintStart_toStartOf="@id/fos_input_layout"
+            app:layout_constraintTop_toBottomOf="@id/fos_input_layout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/grade_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/education_form_grade"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/graduate_year_icon_imv"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_celebration_filled"
+            app:layout_constraintBottom_toBottomOf="@id/graduate_year_input_layout"
+            app:layout_constraintEnd_toEndOf="@id/grade_icon_imv"
+            app:layout_constraintStart_toStartOf="@id/grade_icon_imv"
+            app:layout_constraintTop_toTopOf="@id/graduate_year_input_layout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/graduate_year_input_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            android:hint="@string/education_form_year_of_graduation"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/grade_input_layout"
+            app:layout_constraintStart_toStartOf="@id/grade_input_layout"
+            app:layout_constraintTop_toBottomOf="@id/grade_input_layout">
+
+            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                android:id="@+id/graduate_year_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
+
+    <!--            <LinearLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginTop="4dp"-->
+    <!--                android:layout_marginBottom="4dp"-->
+    <!--                android:orientation="vertical">-->
+
+    <TextView
+        android:id="@+id/school_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        tools:text="University" />
+
+    <TextView
+        android:id="@+id/fos_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Master, Computer Science (2019)" />
+
+    <TextView
+        android:id="@+id/cgpa_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        tools:text="CGPA: 4.00" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/edit_btn"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Edit" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/delete_btn"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:textColor="@android:color/holo_red_dark" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

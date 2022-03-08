@@ -1,11 +1,9 @@
 package me.visutrb.resumegen.entity
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-@Entity
+@Parcelize
 data class Skill(
-    @PrimaryKey val id: Int,
-    val name: String,
-    val resumeId: Int
-)
+    var name: String = "",
+): Parcelable

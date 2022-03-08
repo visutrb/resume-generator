@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".mvp.workexpform.WorkExperienceFormActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp">
+
+        <ImageView
+            android:id="@+id/company_icon_imv"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_business_filled"
+            app:layout_constraintBottom_toBottomOf="@id/company_input_layout"
+            app:layout_constraintEnd_toStartOf="@id/company_input_layout"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/company_input_layout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/company_input_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="56dp"
+            android:hint="@string/work_experience_form_company"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/role_input_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/company_icon_imv"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/company_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/role_icon_imv"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_handyman_filled"
+            app:layout_constraintBottom_toBottomOf="@id/role_input_layout"
+            app:layout_constraintEnd_toStartOf="@id/role_input_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/role_input_layout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/role_input_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            android:hint="@string/work_experience_form_role"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/start_month_input_layout"
+            app:layout_constraintEnd_toEndOf="@id/company_input_layout"
+            app:layout_constraintStart_toStartOf="@id/company_input_layout"
+            app:layout_constraintTop_toBottomOf="@id/company_input_layout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/role_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/start_date_icon_imv"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_calendar_month_filled"
+            app:layout_constraintBottom_toBottomOf="@id/start_month_input_layout"
+            app:layout_constraintEnd_toEndOf="@id/company_icon_imv"
+            app:layout_constraintStart_toStartOf="@id/company_icon_imv"
+            app:layout_constraintTop_toTopOf="@id/start_month_input_layout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/start_month_input_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            android:layout_marginEnd="8dp"
+            android:hint="@string/work_experience_form_from"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/end_month_input_layout"
+            app:layout_constraintEnd_toStartOf="@id/start_year_input_layout"
+            app:layout_constraintStart_toStartOf="@id/role_input_layout"
+            app:layout_constraintTop_toBottomOf="@id/role_input_layout">
+
+            <AutoCompleteTextView
+                android:id="@+id/start_month_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/start_year_input_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/work_experience_form_year"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="@id/start_month_input_layout"
+            app:layout_constraintEnd_toEndOf="@id/company_input_layout"
+            app:layout_constraintStart_toEndOf="@id/start_month_input_layout"
+            app:layout_constraintTop_toTopOf="@id/start_month_input_layout">
+
+            <AutoCompleteTextView
+                android:id="@+id/start_year_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/end_date_icon_imv"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_calendar_month_filled"
+            app:layout_constraintBottom_toBottomOf="@id/end_month_input_layout"
+            app:layout_constraintEnd_toEndOf="@id/start_date_icon_imv"
+            app:layout_constraintStart_toStartOf="@id/start_date_icon_imv"
+            app:layout_constraintTop_toTopOf="@id/end_month_input_layout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/end_month_input_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            android:layout_marginEnd="8dp"
+            android:hint="@string/work_experience_form_to"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/is_working_cb"
+            app:layout_constraintEnd_toStartOf="@id/end_year_input_layout"
+            app:layout_constraintStart_toStartOf="@id/start_month_input_layout"
+            app:layout_constraintTop_toBottomOf="@id/start_month_input_layout">
+
+            <AutoCompleteTextView
+                android:id="@+id/end_month_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/end_year_input_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/work_experience_form_year"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="@id/end_month_input_layout"
+            app:layout_constraintEnd_toEndOf="@id/start_year_input_layout"
+            app:layout_constraintStart_toEndOf="@id/end_month_input_layout"
+            app:layout_constraintTop_toTopOf="@id/end_month_input_layout">
+
+            <AutoCompleteTextView
+                android:id="@+id/end_year_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/is_working_cb"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/resume_form_item_vertical_margin"
+            android:hint="@string/work_experience_form_currently_working"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/end_year_input_layout"
+            app:layout_constraintStart_toStartOf="@id/end_month_input_layout"
+            app:layout_constraintTop_toBottomOf="@id/end_month_input_layout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

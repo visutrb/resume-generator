@@ -2,7 +2,8 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
-    id("com.google.devtools.ksp") version kspVersion
+    id("kotlin-parcelize")
+//    id("com.google.devtools.ksp") version kspVersion
 }
 
 android {
@@ -58,11 +59,13 @@ dependencies {
     implementation("androidx.room:room-runtime:$roomVersion")
     annotationProcessor("androidx.room:room-compiler:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
-    ksp("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
     testImplementation("androidx.room:room-testing:$roomVersion")
 
     implementation("com.google.android.material:material:1.5.0")
+
+    implementation("com.github.bumptech.glide:glide:$glideVersion")
+    kapt("com.github.bumptech.glide:compiler:$glideVersion")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
