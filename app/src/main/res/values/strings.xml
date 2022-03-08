@@ -1,3 +1,76 @@
 <resources>
-    <string name="app_name">Resume Generator</string>
+    <string name="app_name">Resumé Generator</string>
+
+    <string-array name="months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+
+    <string name="error_required">Required</string>
+    <string name="error_invalid">Invalid</string>
+
+    <string name="form_menu_save">Save</string>
+
+    <string name="resume_list_create_resume">Create Resumé</string>
+    <string name="resume_list_no_resume">No Resumé</string>
+
+    <string name="resume_form_title">Resumé</string>
+    <string name="resume_form_first_name">First Name</string>
+    <string name="resume_form_last_name">Last Name</string>
+    <string name="resume_form_mobile_number">Mobile Number</string>
+    <string name="resume_form_email">Email</string>
+    <string name="resume_form_street_address">Street Address</string>
+    <string name="resume_form_city">City</string>
+    <string name="resume_form_state">State</string>
+    <string name="resume_form_country">Country</string>
+    <string name="resume_form_postal_code">Postal Code</string>
+    <string name="resume_form_career_objective">Career Objective</string>
+    <string name="resume_form_skills">Skills</string>
+    <string name="resume_form_add_skill">Add Skill</string>
+    <string name="resume_form_educations">Educations</string>
+    <string name="resume_form_add_education">Add Education</string>
+    <string name="resume_form_add">Add</string>
+    <string name="resume_form_work_experiences">Work Experiences</string>
+    <string name="resume_form_role">Role</string>
+    <string name="resume_form_job_title">Job Title</string>
+
+    <string name="education_form_title">Education</string>
+    <string name="education_form_school_or_college">School/College</string>
+    <string name="education_form_degree">Degree</string>
+    <string name="education_form_fos">Field of Study (Optional)</string>
+    <string name="education_form_grade">Grade</string>
+    <string name="education_form_year_of_graduation">Year of Graduation</string>
+    <string-array name="education_form_degrees">
+        <item>Doctoral</item>
+        <item>Master</item>
+        <item>Bachelor</item>
+        <item>High School</item>
+        <item>Middle School</item>
+        <item>Primary School</item>
+    </string-array>
+
+    <string name="work_experience_form_title">Experience</string>
+    <string name="work_experience_form_company">Company</string>
+    <string name="work_experience_form_role">Role</string>
+    <string name="work_experience_form_from">From</string>
+    <string name="work_experience_form_to">To</string>
+    <string name="work_experience_form_year">Year</string>
+    <string name="work_experience_form_currently_working">Currently working here</string>
+
+    <string name="project_form_title">Project</string>
+    <string name="project_form_project_name">Project Name</string>
+    <string name="project_form_role">Role</string>
+    <string name="project_form_team_size">Team Size</string>
+    <string name="project_form_summary">Summary</string>
+    <string name="project_form_technologies">Technologies</string>
 </resources>
