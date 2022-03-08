@@ -3,8 +3,10 @@ package me.visutrb.resumegen.mvp.resumelist
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import me.visutrb.resumegen.databinding.ItemResumeBinding
 import me.visutrb.resumegen.entity.Resume
+import java.io.File
 
 class ResumeListRecyclerViewAdapter :
     RecyclerView.Adapter<ResumeListRecyclerViewAdapter.ViewHolder>() {
@@ -21,6 +23,14 @@ class ResumeListRecyclerViewAdapter :
         with(holder) {
             binding.nameTv.text = resume.fullName
             binding.jobTitleTv.text = resume.role
+            resume.profilePicturePath.let {
+                if (it.isBlank() || it.isEmpty()) {
+                    return@let
+                }
+                Glide.with(binding.root)
+                    .load(File(it))
+                    .into(binding.profilePictureImv)
+            }
         }
     }
 

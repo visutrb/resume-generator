@@ -1,5 +1,9 @@
 package me.visutrb.resumegen.mvp.resumeform
 
+import android.content.Context
+import android.net.Uri
+import android.os.Environment
+import androidx.core.content.FileProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -12,6 +16,9 @@ import me.visutrb.resumegen.entity.Project
 import me.visutrb.resumegen.entity.Resume
 import me.visutrb.resumegen.entity.WorkExperience
 import me.visutrb.resumegen.mvp.Presenter
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ResumeFormPresenter(
     private val resumeDao: ResumeDao,
@@ -19,6 +26,10 @@ class ResumeFormPresenter(
     private val workExperienceDao: WorkExperienceDao,
     private val projectDao: ProjectDao
 ) : Presenter<ResumeFormPresenter.View>() {
+
+    var currentImageFile: File? = null
+        private set
+
 
     private val deletedEducations = mutableListOf<Education>()
     private val deletedWorkExperiences = mutableListOf<WorkExperience>()
@@ -125,6 +136,44 @@ class ResumeFormPresenter(
             workExperienceDao.deleteAll(deletedWorkExperiences)
             projectDao.deleteAll(deletedProjects)
         }
+    }
+
+    fun getCurrentImageFileUri(context: Context): Uri? {
+        return currentImageFile?.let {
+            FileProvider.getUriForFile(
+                context,
+                "me.visutrb.resumegen.fileprovider",
+                it
+            )
+        }
+    }
+
+    fun createTempImageFile(context: Context) {
+        val timestamp = SimpleDateFormat("yyyyMMddHHmmss").format(Date())
+        val picturesDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        currentImageFile = File.createTempFile("$timestamp", ".jpg", picturesDir)
+    }
+
+    fun createLocalImageFile(context: Context, uri: Uri) {
+        createTempImageFile(context)
+
+        val inputStream = context.contentResolver.openInputStream(uri) ?: return
+        val outputStream = currentImageFile?.outputStream() ?: return
+
+        val buffer = ByteArray(1024)
+        var nextByte = 0
+        do {
+            nextByte = inputStream.read(buffer)
+            outputStream.write(buffer)
+        } while (nextByte != -1)
+
+        outputStream.close()
+        inputStream.close()
+    }
+
+    fun removeCurrentTempImageFile() {
+        currentImageFile?.delete()
+        currentImageFile = null
     }
 
     interface View : Presenter.View {

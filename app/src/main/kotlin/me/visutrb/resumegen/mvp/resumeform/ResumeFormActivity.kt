@@ -2,6 +2,7 @@ package me.visutrb.resumegen.mvp.resumeform
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.util.Log
@@ -11,7 +12,10 @@ import android.view.MenuItem
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toFile
 import androidx.core.view.children
+import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import me.visutrb.resumegen.R
 import me.visutrb.resumegen.databinding.ActivityResumeFormBinding
@@ -21,6 +25,7 @@ import me.visutrb.resumegen.mvp.educationform.EducationFormResultContract
 import me.visutrb.resumegen.mvp.projectform.ProjectFormResultContract
 import me.visutrb.resumegen.mvp.workexpform.WorkExperienceFormResultContract
 import org.koin.android.ext.android.inject
+import java.io.File
 
 class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
 
@@ -29,6 +34,9 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
     private lateinit var educationFormResultLauncher: ActivityResultLauncher<Education?>
     private lateinit var projectFormResultLauncher: ActivityResultLauncher<Project?>
     private lateinit var workExperienceFormResultLauncher: ActivityResultLauncher<WorkExperience?>
+
+    private lateinit var takePictureLauncher: ActivityResultLauncher<Uri>
+    private lateinit var selectImageLauncher: ActivityResultLauncher<String>
 
     private lateinit var resume: Resume
 
@@ -49,6 +57,7 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
         setupLaunchers()
         setupInitialData()
         setupViews()
+        renderResumeData()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -94,6 +103,28 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
             registerForActivityResult(WorkExperienceFormResultContract()) { workExperience ->
                 workExperience?.let { addOrUpdateWorkExperience(it) }
             }
+
+        takePictureLauncher =
+            registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
+                if (isSuccess) {
+                    Log.d(TAG, "Photo saved successfully")
+                    resume.profilePicturePath = presenter.currentImageFile?.absolutePath ?: ""
+                    renderProfileImage()
+                } else {
+                    Log.d(TAG, "Cannot save photo")
+                    presenter.removeCurrentTempImageFile()
+                }
+            }
+
+        selectImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
+            if (it == null) {
+                Log.d(TAG, "selection is cancelled")
+                return@registerForActivityResult
+            }
+            presenter.createLocalImageFile(this@ResumeFormActivity, it)
+            resume.profilePicturePath = presenter.currentImageFile?.absolutePath ?: ""
+            renderProfileImage()
+        }
     }
 
     private fun setupInitialData() {
@@ -109,11 +140,11 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
         this.educations.addAll(educations)
         this.workExperiences.addAll(workExperiences)
         this.projects.addAll(projects)
-        renderData()
+        renderRelatedData()
     }
 
     override fun onLoadRelatedDataFailed(e: Exception) {
-        TODO("Not yet implemented")
+        Log.e(TAG, "Cannot load related data", e)
     }
 
     private fun setupViews() {
@@ -143,7 +174,7 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
         binding.addWorkExperienceBtn.setOnClickListener { launchWorkExperienceFormActivity() }
     }
 
-    private fun renderData() {
+    private fun renderResumeData() {
         resume.let {
             binding.firstNameEdt.setText(it.firstName)
             binding.lastNameEdt.setText(it.lastName)
@@ -158,10 +189,32 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
         }
 
         resume.skillsHolder.skills.forEach { addSkillChip(it) }
+
+        renderProfileImage()
     }
 
+    private fun renderProfileImage() {
+        resume.profilePicturePath.let {
+            if (it.isEmpty() || it.isBlank()) {
+                return@let
+            }
+            Glide.with(this)
+                .load(File(it))
+                .into(binding.profilePictureImv)
+        }
+    }
+
+    private fun renderRelatedData() {
+        educations.forEach { addEducationPreview(it) }
+        workExperiences.forEach { addWorkExperiencePreview(it) }
+        projects.forEach { addProjectPreview(it) }
+    }
+
+
     private fun selectOrTakePicture() {
-        Log.d(TAG, "selectOrTakePicture")
+        selectImageLauncher.launch("image/*")
+//        val uri = presenter.createTempImageFile(this)
+//        takePictureLauncher.launch(uri)
     }
 
     private fun addSkill() {
@@ -200,6 +253,10 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
         }
 
         educations.add(education)
+        addEducationPreview(education)
+    }
+
+    private fun addEducationPreview(education: Education) {
         val preview = EducationPreviewView(this).apply {
             this.education = education
             onEditEducation = { launchEducationFormActivity(it) }
@@ -225,6 +282,10 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
         }
 
         workExperiences.add(workExperience)
+        addWorkExperiencePreview(workExperience)
+    }
+
+    private fun addWorkExperiencePreview(workExperience: WorkExperience) {
         val preview = WorkExperiencePreviewView(this).apply {
             this.workExperience = workExperience
             onEditWorkExperience = { launchWorkExperienceFormActivity(it) }
@@ -250,6 +311,10 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
         }
 
         projects.add(project)
+        addProjectPreview(project)
+    }
+
+    private fun addProjectPreview(project: Project) {
         val preview = ProjectPreviewView(this).apply {
             this.project = project
             onEditProject = { launchProjectFormActivity(it) }
@@ -378,7 +443,6 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
 
     companion object {
         private const val TAG = "ResumeFormActivity"
-
         const val EXTRA_RESUME = "extra_resume"
 
         fun newIntent(context: Context): Intent = Intent(context, ResumeFormActivity::class.java)
