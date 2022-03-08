@@ -3,6 +3,7 @@ package me.visutrb.resumegen.entity
 import android.os.Parcelable
 import androidx.room.Embedded
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 import java.util.*
@@ -23,7 +24,8 @@ data class Resume(
     var totalYearsOfExp: Int = -1,
     var createDate: Date = Date(),
     var updateDate: Date = Date(),
-    @Embedded var skillsHolder: SkillsHolder = SkillsHolder()
+    @Embedded var skillsHolder: SkillsHolder = SkillsHolder(),
+    @Ignore val uuid: String = UUID.randomUUID().toString()
 ) : Parcelable {
 
     val fullName: String
