@@ -1,5 +1,6 @@
 package me.visutrb.resumegen.mvp.resumeform
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -33,6 +34,9 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
     private lateinit var educationFormResultLauncher: ActivityResultLauncher<Education?>
     private lateinit var projectFormResultLauncher: ActivityResultLauncher<Project?>
     private lateinit var workExperienceFormResultLauncher: ActivityResultLauncher<WorkExperience?>
+
+    private lateinit var requestCameraPermissionLauncher: ActivityResultLauncher<String>
+    private lateinit var requestReadExternalStoragePermissionLauncher: ActivityResultLauncher<String>
 
     private lateinit var takePictureLauncher: ActivityResultLauncher<Uri>
     private lateinit var selectImageLauncher: ActivityResultLauncher<String>
@@ -103,6 +107,22 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
                 workExperience?.let { addOrUpdateWorkExperience(it) }
             }
 
+        requestCameraPermissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+                if (!isGranted) {
+                    return@registerForActivityResult
+                }
+                launchCamera()
+            }
+
+        requestReadExternalStoragePermissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+                if (!isGranted) {
+                    return@registerForActivityResult
+                }
+                launchGallery()
+            }
+
         takePictureLauncher =
             registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
                 if (isSuccess) {
@@ -110,7 +130,6 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
                     resume.profilePicturePath = presenter.currentImageFile?.absolutePath ?: ""
                     renderProfileImage()
                 } else {
-                    Log.d(TAG, "Cannot save photo")
                     presenter.removeCurrentTempImageFile()
                 }
             }
@@ -213,7 +232,6 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
         projects.forEach { addProjectPreview(it) }
     }
 
-
     private fun selectOrTakePicture() {
         val bottomSheet = SelectImageSourceBottomSheet()
         bottomSheet.onOptionSelected = { dialog, option ->
@@ -227,12 +245,26 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
     }
 
     private fun launchCamera() {
+        val permissionGranted = presenter.isPermissionGranted(this, Manifest.permission.CAMERA)
+        if (!permissionGranted) {
+            requestCameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+            return
+        }
+
         presenter.createTempImageFile(this)
         val uri = presenter.getCurrentImageFileUri(this)
         takePictureLauncher.launch(uri)
     }
 
     private fun launchGallery() {
+        val permissionGranted =
+            presenter.isPermissionGranted(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+        if (!permissionGranted) {
+            requestReadExternalStoragePermissionLauncher.launch(
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+            return
+        }
         selectImageLauncher.launch("image/*")
     }
 
