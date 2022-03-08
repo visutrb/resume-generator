@@ -51,9 +51,19 @@ class WorkExperiencePreviewView : FrameLayout {
             binding.periodTv.text = workExperience?.let {
                 if (it.startMonth != -1 && it.startYear != -1) {
                     if (it.isCurrentlyEmployed) {
-                        "${months[it.startMonth]} ${it.startYear} - Present"
+                        resources.getString(
+                            R.string.work_experience_preview_duration_to_present,
+                            months[it.startMonth],
+                            it.startYear
+                        )
                     } else {
-                        "${months[it.startMonth]} ${it.startYear} - ${months[it.endMonth]} ${it.endYear}"
+                        resources.getString(
+                            R.string.work_experience_preview_duration,
+                            months[it.startMonth],
+                            it.startYear,
+                            months[it.endMonth],
+                            it.endYear
+                        )
                     }
                 } else {
                     ""

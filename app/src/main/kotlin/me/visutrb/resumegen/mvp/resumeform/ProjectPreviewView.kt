@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import com.google.android.material.chip.Chip
+import me.visutrb.resumegen.R
 import me.visutrb.resumegen.databinding.ViewProjectPreviewBinding
 import me.visutrb.resumegen.entity.Project
 import me.visutrb.resumegen.entity.Technology
@@ -39,8 +40,9 @@ class ProjectPreviewView : FrameLayout {
     private fun updateViews() {
         project?.let {
             binding.projectNameTv.text = it.name
-            binding.roleTv.text = "Role: " + it.role
-            binding.teamSizeTv.text = "Team Size: " + it.teamSize.toString()
+            binding.roleTv.text = resources.getString(R.string.project_preview_role, it.role)
+            binding.teamSizeTv.text =
+                resources.getString(R.string.project_preview_team_size, it.teamSize)
             binding.summaryTv.text = it.summary
         }
         binding.technologiesChipGroup.removeAllViews()

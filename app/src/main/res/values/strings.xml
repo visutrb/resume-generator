@@ -59,6 +59,9 @@
         <item>Primary School</item>
     </string-array>
 
+    <string name="education_preview_fos">%1$s, %2$s (%3$d)</string>
+    <string name="education_preview_cgpa">CGPA: %1$.2f</string>
+
     <string name="work_experience_form_title">Experience</string>
     <string name="work_experience_form_company">Company</string>
     <string name="work_experience_form_role">Role</string>
@@ -67,10 +70,16 @@
     <string name="work_experience_form_year">Year</string>
     <string name="work_experience_form_currently_working">Currently working here</string>
 
+    <string name="work_experience_preview_duration_to_present">%1$s %2$d - Present</string>
+    <string name="work_experience_preview_duration">%1$s %2$d - %3$s %4$d</string>
+
     <string name="project_form_title">Project</string>
     <string name="project_form_project_name">Project Name</string>
     <string name="project_form_role">Role</string>
     <string name="project_form_team_size">Team Size</string>
     <string name="project_form_summary">Summary</string>
     <string name="project_form_technologies">Technologies</string>
+
+    <string name="project_preview_role">Role: %1$s</string>
+    <string name="project_preview_team_size">Team Size: %1$d</string>
 </resources>

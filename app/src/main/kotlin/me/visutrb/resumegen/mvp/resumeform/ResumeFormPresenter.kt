@@ -30,7 +30,6 @@ class ResumeFormPresenter(
     var currentImageFile: File? = null
         private set
 
-
     private val deletedEducations = mutableListOf<Education>()
     private val deletedWorkExperiences = mutableListOf<WorkExperience>()
     private val deletedProjects = mutableListOf<Project>()
@@ -130,8 +129,6 @@ class ResumeFormPresenter(
             educationDao.updateAll(oldEducations)
             educationDao.insertAll(newEducations)
 
-            println("oldWorkExperiences: $oldWorkExperiences")
-            println("newWorkExperiences: $newWorkExperiences")
             workExperienceDao.updateAll(oldWorkExperiences)
             workExperienceDao.insertAll(newWorkExperiences)
 
