@@ -31,7 +31,7 @@
     <string name="resume_form_email">Email</string>
     <string name="resume_form_street_address">Street Address</string>
     <string name="resume_form_city">City</string>
-    <string name="resume_form_state">State</string>
+    <string name="resume_form_state">State (Optional)</string>
     <string name="resume_form_country">Country</string>
     <string name="resume_form_postal_code">Postal Code</string>
     <string name="resume_form_career_objective">Career Objective</string>

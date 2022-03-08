@@ -436,11 +436,6 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
             isValid = false
         }
 
-        if (state.isBlank() || state.isEmpty()) {
-            binding.stateEdt.error = getString(R.string.error_required)
-            isValid = false
-        }
-
         if (country.isBlank() || country.isEmpty()) {
             binding.countryEdt.error = getString(R.string.error_required)
             isValid = false
