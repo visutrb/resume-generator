@@ -215,9 +215,25 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
 
 
     private fun selectOrTakePicture() {
+        val bottomSheet = SelectImageSourceBottomSheet()
+        bottomSheet.onOptionSelected = { dialog, option ->
+            when (option) {
+                SelectImageSourceBottomSheet.OPTION_CAMERA -> launchCamera()
+                SelectImageSourceBottomSheet.OPTION_GALLERY -> launchGallery()
+            }
+            dialog.dismiss()
+        }
+        bottomSheet.show(supportFragmentManager, SelectImageSourceBottomSheet.TAG)
+    }
+
+    private fun launchCamera() {
+        presenter.createTempImageFile(this)
+        val uri = presenter.getCurrentImageFileUri(this)
+        takePictureLauncher.launch(uri)
+    }
+
+    private fun launchGallery() {
         selectImageLauncher.launch("image/*")
-//        val uri = presenter.createTempImageFile(this)
-//        takePictureLauncher.launch(uri)
     }
 
     private fun addSkill() {

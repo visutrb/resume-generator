@@ -82,4 +82,7 @@
 
     <string name="project_preview_role">Role: %1$s</string>
     <string name="project_preview_team_size">Team Size: %1$d</string>
+
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
 </resources>
