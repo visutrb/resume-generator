@@ -99,7 +99,7 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
 
         projectFormResultLauncher =
             registerForActivityResult(ProjectFormResultContract()) { project ->
-                project?.let { addOrUpdateProject(project) }
+                project?.let { addOrUpdateProject(it) }
             }
 
         workExperienceFormResultLauncher =
