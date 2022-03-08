@@ -56,7 +56,7 @@ class WorkExperienceFormActivity : AppCompatActivity() {
         supportActionBar?.let {
             it.setDisplayHomeAsUpEnabled(true)
             it.setHomeAsUpIndicator(R.drawable.ic_close_filled)
-            it.title = getString(R.string.project_form_title)
+            it.title = getString(R.string.work_experience_form_title)
         }
     }
 

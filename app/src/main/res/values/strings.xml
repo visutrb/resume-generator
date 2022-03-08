@@ -59,6 +59,7 @@
         <item>Primary School</item>
     </string-array>
 
+    <string name="work_experience_form_title">Experience</string>
     <string name="work_experience_form_company">Company</string>
     <string name="work_experience_form_role">Role</string>
     <string name="work_experience_form_from">From</string>

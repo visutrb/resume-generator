@@ -65,47 +65,78 @@ class ResumeFormPresenter(
         projects: List<Project>
     ) = launch {
         try {
-            if (resume.id == 0) {
-                insertData(resume, educations, workExperiences, projects)
-            } else {
-                updateData(resume, educations, workExperiences, projects)
-                removeDeletedData()
-            }
+            insertOrUpdateData(resume, educations, workExperiences, projects)
+            removeDeletedData()
             view?.onDataSaved()
         } catch (e: Exception) {
             view?.onSaveDataFailed(e)
         }
     }
 
-    private suspend fun insertData(
+    private suspend fun insertOrUpdateData(
         resume: Resume,
         educations: List<Education>,
         workExperiences: List<WorkExperience>,
         projects: List<Project>
     ) {
-        val resumeId = withContext(Dispatchers.IO) { resumeDao.insert(resume) }.toInt()
-        educations.forEach { it.resumeId = resumeId }
-        workExperiences.forEach { it.resumeId = resumeId }
-        projects.forEach { it.resumeId = resumeId }
-
-        withContext(Dispatchers.IO) {
-            educationDao.insertAll(educations)
-            workExperienceDao.insertAll(workExperiences)
-            projectDao.insertAll(projects)
+        var resumeId: Int
+        if (resume.id == 0) {
+            resumeId = withContext(Dispatchers.IO) { resumeDao.insert(resume) }.toInt()
+        } else {
+            resumeId = resume.id
+            withContext(Dispatchers.IO) { resumeDao.update(resume) }
         }
-    }
 
-    private suspend fun updateData(
-        resume: Resume,
-        educations: List<Education>,
-        workExperiences: List<WorkExperience>,
-        projects: List<Project>
-    ) {
+        val newEducations = mutableListOf<Education>()
+        val oldEducations = mutableListOf<Education>()
+        educations.forEach {
+            if (it.resumeId == 0) {
+                it.resumeId = resumeId
+            }
+            if (it.id == 0) {
+                newEducations.add(it)
+            } else {
+                oldEducations.add(it)
+            }
+        }
+
+        val newWorkExperiences = mutableListOf<WorkExperience>()
+        val oldWorkExperiences = mutableListOf<WorkExperience>()
+        workExperiences.forEach {
+            if (it.resumeId == 0) {
+                it.resumeId = resumeId
+            }
+            if (it.id == 0) {
+                newWorkExperiences.add(it)
+            } else {
+                oldWorkExperiences.add(it)
+            }
+        }
+
+        val newProjects = mutableListOf<Project>()
+        val oldProjects = mutableListOf<Project>()
+        projects.forEach {
+            if (it.resumeId == 0) {
+                it.resumeId = resumeId
+            }
+            if (it.id == 0) {
+                newProjects.add(it)
+            } else {
+                oldProjects.add(it)
+            }
+        }
+
         withContext(Dispatchers.IO) {
-            resumeDao.update(resume)
-            educationDao.updateAll(educations)
-            workExperienceDao.updateAll(workExperiences)
-            projectDao.updateAll(projects)
+            educationDao.updateAll(oldEducations)
+            educationDao.insertAll(newEducations)
+
+            println("oldWorkExperiences: $oldWorkExperiences")
+            println("newWorkExperiences: $newWorkExperiences")
+            workExperienceDao.updateAll(oldWorkExperiences)
+            workExperienceDao.insertAll(newWorkExperiences)
+
+            projectDao.updateAll(oldProjects)
+            projectDao.insertAll(newProjects)
         }
     }
 

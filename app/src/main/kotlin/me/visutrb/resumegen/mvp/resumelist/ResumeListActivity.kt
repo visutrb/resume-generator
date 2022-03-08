@@ -23,7 +23,9 @@ class ResumeListActivity : Activity(), ResumeListPresenter.View {
 
         presenter.view = this
 
-        recyclerViewAdapter = ResumeListRecyclerViewAdapter()
+        recyclerViewAdapter = ResumeListRecyclerViewAdapter().apply {
+            onResumeSelected = { launchResumeFormActivity(it) }
+        }
 
         binding.resumeRv.apply {
             adapter = recyclerViewAdapter
@@ -50,8 +52,8 @@ class ResumeListActivity : Activity(), ResumeListPresenter.View {
         recyclerViewAdapter.replaceAll(resumes)
     }
 
-    private fun launchResumeFormActivity() {
-        val intent = ResumeFormActivity.newIntent(this)
+    private fun launchResumeFormActivity(resume: Resume? = null) {
+        val intent = ResumeFormActivity.newIntent(this, resume)
         startActivity(intent)
     }
 

@@ -11,6 +11,8 @@ import java.io.File
 class ResumeListRecyclerViewAdapter :
     RecyclerView.Adapter<ResumeListRecyclerViewAdapter.ViewHolder>() {
 
+    var onResumeSelected: ((resume: Resume) -> Unit)? = null
+
     private val resumes = mutableListOf<Resume>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,6 +23,7 @@ class ResumeListRecyclerViewAdapter :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val resume = resumes[position]
         with(holder) {
+            binding.root.setOnClickListener { onResumeSelected?.invoke(resume) }
             binding.nameTv.text = resume.fullName
             binding.jobTitleTv.text = resume.role
             resume.profilePicturePath.let {

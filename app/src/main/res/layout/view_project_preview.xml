@@ -16,6 +16,7 @@
         tools:text="Awesome Project" />
 
     <TextView
+
         android:id="@+id/team_size_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,8 +32,14 @@
         android:id="@+id/summary_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         tools:text="Lorem ipsum" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Technologies:" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/technologies_chip_group"

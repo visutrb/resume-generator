@@ -5,5 +5,5 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Technology(
-    var name: String
+    var name: String = ""
 ) : Parcelable

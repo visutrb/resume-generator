@@ -13,7 +13,6 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.net.toFile
 import androidx.core.view.children
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
@@ -185,6 +184,10 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
             binding.stateEdt.setText(it.address.state)
             binding.countryEdt.setText(it.address.country)
             binding.postalCodeEdt.setText(it.address.postalCode)
+            binding.roleEdt.setText(it.role)
+            if (it.totalYearsOfExp != -1) {
+                binding.yearsOfExpEdt.setText(it.totalYearsOfExp.toString())
+            }
             binding.careerObjectiveEdt.setText(it.careerObjective)
         }
 
@@ -345,6 +348,7 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
         val firstName = binding.firstNameEdt.text.toString()
         val lastName = binding.lastNameEdt.text.toString()
         val mobile = binding.mobileNumberEdt.text.toString()
+        val email = binding.emailEdt.text.toString()
         val street = binding.addressEdt.text.toString()
         val city = binding.cityEdt.text.toString()
         val state = binding.stateEdt.text.toString()
@@ -366,6 +370,11 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
 
         if (mobile.isBlank() || mobile.isEmpty()) {
             binding.mobileNumberEdt.error = getString(R.string.error_required)
+            isValid = false
+        }
+
+        if (email.isBlank() || email.isEmpty()) {
+            binding.emailEdt.error = getString(R.string.error_required)
             isValid = false
         }
 
@@ -418,6 +427,7 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
             it.firstName = firstName
             it.lastName = lastName
             it.phoneNumber = mobile
+            it.emailAddress = email
             it.address = Address(
                 street = street,
                 city = city,
@@ -445,6 +455,9 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
         private const val TAG = "ResumeFormActivity"
         const val EXTRA_RESUME = "extra_resume"
 
-        fun newIntent(context: Context): Intent = Intent(context, ResumeFormActivity::class.java)
+        fun newIntent(context: Context, resume: Resume? = null): Intent =
+            Intent(context, ResumeFormActivity::class.java).apply {
+                resume?.let { putExtra(EXTRA_RESUME, it) }
+            }
     }
 }

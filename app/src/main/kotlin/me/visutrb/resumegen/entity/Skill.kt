@@ -1,10 +1,9 @@
 package me.visutrb.resumegen.entity
 
-//@Entity
-data class Skill(
-//    @PrimaryKey(autoGenerate = true) var id: Int = 0,
-    var name: String = "",
-//    var resumeId: Int = 0
-) {
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-}
+@Parcelize
+data class Skill(
+    var name: String = "",
+): Parcelable

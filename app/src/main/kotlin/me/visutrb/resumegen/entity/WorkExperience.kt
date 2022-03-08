@@ -10,7 +10,7 @@ import java.util.*
 @Entity
 @Parcelize
 data class WorkExperience(
-    @PrimaryKey var id: Int = 0,
+    @PrimaryKey(autoGenerate = true) var id: Int = 0,
     var companyName: String = "",
     var role: String = "",
     var startMonth: Int = -1,

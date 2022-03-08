@@ -1,11 +1,14 @@
 package me.visutrb.resumegen.entity
 
+import android.os.Parcelable
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 import java.util.*
 
 @Entity
+@Parcelize
 data class Resume(
     @PrimaryKey(autoGenerate = true) var id: Int = 0,
     var firstName: String = "",
@@ -21,7 +24,7 @@ data class Resume(
     var createDate: Date = Date(),
     var updateDate: Date = Date(),
     @Embedded var skillsHolder: SkillsHolder = SkillsHolder()
-) {
+) : Parcelable {
 
     val fullName: String
         get() {
