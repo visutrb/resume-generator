@@ -10,4 +10,15 @@ data class Address(
     var state: String = "",
     var city: String = "",
     var postalCode: String = ""
-) : Parcelable
+) : Parcelable {
+
+    val addressLine1: String
+        get() = street
+
+    val addressLine2: String
+        get() = if (state.isEmpty() || state.isBlank()) {
+            "$city, $country $postalCode"
+        } else {
+            "$city, $state, $country $postalCode"
+        }
+}

@@ -2,6 +2,8 @@ package me.visutrb.resumegen.di
 
 import androidx.room.Room
 import me.visutrb.resumegen.db.AppDatabase
+import me.visutrb.resumegen.mvp.resumedetails.ResumeDetailsActivity
+import me.visutrb.resumegen.mvp.resumedetails.ResumeDetailsPresenter
 import me.visutrb.resumegen.mvp.resumeform.ResumeFormActivity
 import me.visutrb.resumegen.mvp.resumeform.ResumeFormPresenter
 import me.visutrb.resumegen.mvp.resumelist.ResumeListActivity
@@ -28,5 +30,11 @@ val resumeListModule = module {
 val resumeFormModule = module {
     scope<ResumeFormActivity> {
         scoped { ResumeFormPresenter(get(), get(), get(), get()) }
+    }
+}
+
+val resumeDetailsModule = module {
+    scope<ResumeDetailsActivity> {
+        scoped { ResumeDetailsPresenter(get(), get(), get()) }
     }
 }

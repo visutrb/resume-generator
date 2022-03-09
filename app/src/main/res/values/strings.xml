@@ -31,7 +31,7 @@
     <string name="resume_form_email">Email</string>
     <string name="resume_form_street_address">Street Address</string>
     <string name="resume_form_city">City</string>
-    <string name="resume_form_state">State</string>
+    <string name="resume_form_state">State (Optional)</string>
     <string name="resume_form_country">Country</string>
     <string name="resume_form_postal_code">Postal Code</string>
     <string name="resume_form_career_objective">Career Objective</string>
@@ -59,8 +59,8 @@
         <item>Primary School</item>
     </string-array>
 
-    <string name="education_preview_fos">%1$s, %2$s (%3$d)</string>
-    <string name="education_preview_cgpa">CGPA: %1$.2f</string>
+    <string name="education_fos">%1$s, %2$s (%3$d)</string>
+    <string name="education_cgpa">CGPA: %1$.2f</string>
 
     <string name="work_experience_form_title">Experience</string>
     <string name="work_experience_form_company">Company</string>
@@ -85,4 +85,8 @@
 
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
+
+    <string name="title_activity_resume_details">Resumé</string>
+
+    <string name="resume_details_menu_edit">Edit</string>
 </resources>

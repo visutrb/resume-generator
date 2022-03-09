@@ -3,17 +3,14 @@ package me.visutrb.resumegen.mvp.projectform
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.chip.Chip
 import me.visutrb.resumegen.R
 import me.visutrb.resumegen.databinding.ActivityProjectFormBinding
 import me.visutrb.resumegen.entity.Project
-import me.visutrb.resumegen.entity.TechnologiesHolder
 import me.visutrb.resumegen.entity.Technology
 
 class ProjectFormActivity : AppCompatActivity() {
@@ -21,6 +18,8 @@ class ProjectFormActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProjectFormBinding
 
     private lateinit var project: Project
+
+    private var technologies = mutableListOf<Technology>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,14 +35,6 @@ class ProjectFormActivity : AppCompatActivity() {
                     addTechnology()
                 }
                 true
-            }
-            setOnKeyListener { view, keyCode, event ->
-                if ((view as EditText).text.isNotEmpty() && keyCode == KeyEvent.KEYCODE_ENTER) {
-                    addTechnology()
-                    true
-                } else {
-                    false
-                }
             }
         }
     }
@@ -86,7 +77,10 @@ class ProjectFormActivity : AppCompatActivity() {
             }
             binding.summaryEdt.setText(it.summary)
         }
-        project.technologiesHolder.technologies.forEach { addChip(it) }
+        project.technologiesHolder.technologies.forEach {
+            technologies.add(it)
+            addChip(it)
+        }
     }
 
     private fun addTechnology() {
@@ -98,7 +92,7 @@ class ProjectFormActivity : AppCompatActivity() {
         binding.technologyEdt.setText("")
 
         val technology = Technology(technologyName)
-        project.technologiesHolder.technologies.add(technology)
+        technologies.add(technology)
 
         addChip(technology)
     }
@@ -108,7 +102,7 @@ class ProjectFormActivity : AppCompatActivity() {
             text = technology.name
             isCloseIconVisible = true
             setOnCloseIconClickListener {
-                project.technologiesHolder.technologies.remove(technology)
+                technologies.remove(technology)
                 binding.technologiesChipGroup.removeView(it)
             }
         }
@@ -153,6 +147,7 @@ class ProjectFormActivity : AppCompatActivity() {
             it.role = role
             it.teamSize = teamSize
             it.summary = summary
+            it.technologiesHolder.technologies = technologies
         }
 
         val intent = Intent().apply {
@@ -168,6 +163,8 @@ class ProjectFormActivity : AppCompatActivity() {
     }
 
     companion object {
+        private const val TAG = "ProjectFormActivity"
+
         const val EXTRA_PROJECT = "extra_project"
 
         fun newIntent(context: Context, project: Project?): Intent {

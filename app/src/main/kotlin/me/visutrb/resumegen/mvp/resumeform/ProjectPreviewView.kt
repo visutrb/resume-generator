@@ -34,6 +34,8 @@ class ProjectPreviewView : FrameLayout {
     init {
         val inflater = LayoutInflater.from(context)
         binding = ViewProjectPreviewBinding.inflate(inflater)
+        binding.editBtn.setOnClickListener { project?.let { onEditProject?.invoke(it) } }
+        binding.deleteBtn.setOnClickListener { project?.let { onDeleteProject?.invoke(it) } }
         addView(binding.root)
     }
 
