@@ -12,4 +12,6 @@
     <color name="text_secondary">@android:color/secondary_text_light</color>
 
     <color name="collapsing_action_bar_color">@color/purple_500</color>
+
+    <color name="material_background">#F4F4F4</color>
 </resources>

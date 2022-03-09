@@ -60,7 +60,9 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
         setupLaunchers()
         setupInitialData()
         setupViews()
+
         renderResumeData()
+        renderRelatedData()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -147,7 +149,12 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
 
     private fun setupInitialData() {
         resume = intent.getParcelableExtra(EXTRA_RESUME) ?: Resume()
-        presenter.loadRelatedData(resume)
+        educations = intent.getParcelableArrayExtra(EXTRA_EDUCATIONS)
+            ?.toMutableList() as MutableList<Education>? ?: mutableListOf()
+        workExperiences = intent.getParcelableArrayExtra(EXTRA_WORK_EXPERIENCES)
+            ?.toMutableList() as MutableList<WorkExperience>? ?: mutableListOf()
+        projects = intent.getParcelableArrayExtra(EXTRA_PROJECTS)
+            ?.toMutableList() as MutableList<Project>? ?: mutableListOf()
     }
 
     override fun onRelatedDataLoaded(
@@ -350,6 +357,7 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
     }
 
     private fun addOrUpdateProject(project: Project) {
+        println(project)
         val idx = projects.indexOfFirst { it.uuid == project.uuid }
         if (idx != -1) {
             projects[idx] = project
@@ -487,6 +495,13 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
     }
 
     override fun onDataSaved() {
+        val data = Intent().apply {
+            putExtra(EXTRA_RESUME, resume)
+            putExtra(EXTRA_EDUCATIONS, educations.toTypedArray())
+            putExtra(EXTRA_WORK_EXPERIENCES, workExperiences.toTypedArray())
+            putExtra(EXTRA_PROJECTS, projects.toTypedArray())
+        }
+        setResult(RESULT_OK, data)
         finish()
     }
 
@@ -496,11 +511,24 @@ class ResumeFormActivity : Activity(), ResumeFormPresenter.View {
 
     companion object {
         private const val TAG = "ResumeFormActivity"
-        const val EXTRA_RESUME = "extra_resume"
 
-        fun newIntent(context: Context, resume: Resume? = null): Intent =
+        const val EXTRA_RESUME = "extra_resume"
+        const val EXTRA_EDUCATIONS = "extra_educations"
+        const val EXTRA_WORK_EXPERIENCES = "extra_work_experiences"
+        const val EXTRA_PROJECTS = "extra_projects"
+
+        fun newIntent(
+            context: Context,
+            resume: Resume? = null,
+            educations: List<Education> = listOf(),
+            workExperiences: List<WorkExperience> = listOf(),
+            projects: List<Project> = listOf()
+        ): Intent =
             Intent(context, ResumeFormActivity::class.java).apply {
-                resume?.let { putExtra(EXTRA_RESUME, it) }
+                putExtra(EXTRA_RESUME, resume)
+                putExtra(EXTRA_EDUCATIONS, educations.toTypedArray())
+                putExtra(EXTRA_WORK_EXPERIENCES, workExperiences.toTypedArray())
+                putExtra(EXTRA_PROJECTS, projects.toTypedArray())
             }
     }
 }

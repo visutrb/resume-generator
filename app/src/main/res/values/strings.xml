@@ -87,4 +87,6 @@
     <string name="gallery">Gallery</string>
 
     <string name="title_activity_resume_details">Resumé</string>
+
+    <string name="resume_details_menu_edit">Edit</string>
 </resources>

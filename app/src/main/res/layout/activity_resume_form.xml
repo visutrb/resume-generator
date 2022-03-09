@@ -36,6 +36,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:src="@drawable/ic_image_filled"
+            app:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="@id/profile_picture_imv"
             app:layout_constraintEnd_toEndOf="@id/profile_picture_imv" />
 
