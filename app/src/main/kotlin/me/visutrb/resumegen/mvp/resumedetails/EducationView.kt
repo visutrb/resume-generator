@@ -1,25 +1,22 @@
-package me.visutrb.resumegen.mvp.resumeform
+package me.visutrb.resumegen.mvp.resumedetails
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import me.visutrb.resumegen.R
-import me.visutrb.resumegen.databinding.ViewEducationPreviewBinding
+import me.visutrb.resumegen.databinding.ViewEducationBinding
 import me.visutrb.resumegen.entity.Education
 
-class EducationPreviewView : FrameLayout {
+class EducationView : FrameLayout {
 
-    private var binding: ViewEducationPreviewBinding
+    private lateinit var binding: ViewEducationBinding
 
     var education: Education? = null
         set(value) {
             field = value
-            updateViews()
+            renderEducation()
         }
-
-    var onEditEducation: ((education: Education) -> Unit)? = null
-    var onDeleteEducation: ((education: Education) -> Unit)? = null
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
@@ -30,29 +27,21 @@ class EducationPreviewView : FrameLayout {
     )
 
     init {
-        val inflater = LayoutInflater.from(context)
-        binding = ViewEducationPreviewBinding.inflate(inflater)
-        addView(binding.root)
-        updateViews()
-        setupButtons()
+        setupViews()
     }
 
-    private fun updateViews() {
+    private fun setupViews() {
+        val layoutInflater = LayoutInflater.from(context)
+        binding = ViewEducationBinding.inflate(layoutInflater)
+        addView(binding.root)
+    }
+
+    private fun renderEducation() {
         education?.let {
             binding.schoolTv.text = it.school
             binding.fosTv.text =
                 resources.getString(R.string.education_fos, it.degree, it.fos, it.graduateYear)
             binding.cgpaTv.text = resources.getString(R.string.education_cgpa, it.cgpa)
-        }
-    }
-
-    private fun setupButtons() {
-        binding.editBtn.setOnClickListener {
-            education?.let { ed -> onEditEducation?.invoke(ed) }
-        }
-
-        binding.deleteBtn.setOnClickListener {
-            education?.let { ed -> onDeleteEducation?.invoke(ed) }
         }
     }
 }

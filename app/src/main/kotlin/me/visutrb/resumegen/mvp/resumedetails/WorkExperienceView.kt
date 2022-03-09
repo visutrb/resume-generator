@@ -1,27 +1,22 @@
-package me.visutrb.resumegen.mvp.resumeform
+package me.visutrb.resumegen.mvp.resumedetails
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import me.visutrb.resumegen.R
-import me.visutrb.resumegen.databinding.ViewWorkExperiencePreviewBinding
+import me.visutrb.resumegen.databinding.ViewWorkExperienceBinding
 import me.visutrb.resumegen.entity.WorkExperience
 
-class WorkExperiencePreviewView : FrameLayout {
+class WorkExperienceView : FrameLayout {
 
-    private var binding: ViewWorkExperiencePreviewBinding
-
-    private var months = arrayOf<String>()
+    private lateinit var binding: ViewWorkExperienceBinding
 
     var workExperience: WorkExperience? = null
         set(value) {
             field = value
-            updateViews()
+            renderWorkExperience()
         }
-
-    var onEditWorkExperience: ((workExperience: WorkExperience) -> Unit)? = null
-    var onDeleteWorkExperience: ((workExperience: WorkExperience) -> Unit)? = null
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
@@ -32,19 +27,17 @@ class WorkExperiencePreviewView : FrameLayout {
     )
 
     init {
-        val inflater = LayoutInflater.from(context)
-        binding = ViewWorkExperiencePreviewBinding.inflate(inflater)
-        addView(binding.root)
-
-        updateViews()
-        setupButtons()
+        setupView()
     }
 
-    private fun updateViews() {
-        if (months.isEmpty()) {
-            months = context.resources.getStringArray(R.array.months)
-        }
+    private fun setupView() {
+        val layoutInflater = LayoutInflater.from(context)
+        binding = ViewWorkExperienceBinding.inflate(layoutInflater)
+        addView(binding.root)
+    }
 
+    private fun renderWorkExperience() {
+        val months = resources.getStringArray(R.array.months)
         workExperience?.let {
             binding.companyTv.text = it.companyName
             binding.roleTv.text = it.role
@@ -69,16 +62,6 @@ class WorkExperiencePreviewView : FrameLayout {
                     ""
                 }
             }
-        }
-    }
-
-    private fun setupButtons() {
-        binding.editBtn.setOnClickListener {
-            workExperience?.let { wx -> onEditWorkExperience?.invoke(wx) }
-        }
-
-        binding.deleteBtn.setOnClickListener {
-            workExperience?.let { wx -> onDeleteWorkExperience?.invoke(wx) }
         }
     }
 }

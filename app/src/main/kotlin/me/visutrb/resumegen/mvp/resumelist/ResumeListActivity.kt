@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import me.visutrb.resumegen.databinding.ActivityResumeListBinding
 import me.visutrb.resumegen.entity.Resume
 import me.visutrb.resumegen.mvp.Activity
+import me.visutrb.resumegen.mvp.resumedetails.ResumeDetailsActivity
 import me.visutrb.resumegen.mvp.resumeform.ResumeFormActivity
 import org.koin.android.ext.android.inject
 
@@ -24,7 +25,7 @@ class ResumeListActivity : Activity(), ResumeListPresenter.View {
         presenter.view = this
 
         recyclerViewAdapter = ResumeListRecyclerViewAdapter().apply {
-            onResumeSelected = { launchResumeFormActivity(it) }
+            onResumeSelected = { launchResumeDetailsActivity(it) }
         }
 
         binding.resumeRv.apply {
@@ -50,6 +51,11 @@ class ResumeListActivity : Activity(), ResumeListPresenter.View {
             false -> View.GONE
         }
         recyclerViewAdapter.replaceAll(resumes)
+    }
+
+    private fun launchResumeDetailsActivity(resume: Resume) {
+        val intent = ResumeDetailsActivity.newIntent(this, resume)
+        startActivity(intent)
     }
 
     private fun launchResumeFormActivity(resume: Resume? = null) {

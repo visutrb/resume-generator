@@ -59,8 +59,8 @@
         <item>Primary School</item>
     </string-array>
 
-    <string name="education_preview_fos">%1$s, %2$s (%3$d)</string>
-    <string name="education_preview_cgpa">CGPA: %1$.2f</string>
+    <string name="education_fos">%1$s, %2$s (%3$d)</string>
+    <string name="education_cgpa">CGPA: %1$.2f</string>
 
     <string name="work_experience_form_title">Experience</string>
     <string name="work_experience_form_company">Company</string>
@@ -85,4 +85,6 @@
 
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
+
+    <string name="title_activity_resume_details">Resumé</string>
 </resources>
