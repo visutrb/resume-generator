@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="resume_details_years_of_exp">
+        <item quantity="one">Experience: %d Year</item>
+        <item quantity="other">Experience: %d Years</item>
+    </plurals>
+</resources>
