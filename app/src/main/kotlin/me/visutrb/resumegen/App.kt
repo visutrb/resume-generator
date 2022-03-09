@@ -2,6 +2,7 @@ package me.visutrb.resumegen
 
 import android.app.Application
 import me.visutrb.resumegen.di.databaseModule
+import me.visutrb.resumegen.di.resumeDetailsModule
 import me.visutrb.resumegen.di.resumeFormModule
 import me.visutrb.resumegen.di.resumeListModule
 import org.koin.android.ext.koin.androidContext
@@ -13,7 +14,7 @@ class App : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@App)
-            modules(databaseModule, resumeListModule, resumeFormModule)
+            modules(databaseModule, resumeListModule, resumeFormModule, resumeDetailsModule)
         }
     }
 }

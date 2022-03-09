@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import com.google.android.material.chip.Chip
+import me.visutrb.resumegen.R
 import me.visutrb.resumegen.databinding.ViewProjectBinding
 import me.visutrb.resumegen.entity.Project
 
@@ -42,7 +43,10 @@ class ProjectView : FrameLayout {
             binding.projectNameTv.text = it.name
             binding.roleTv.text = it.role
             binding.summaryTv.text = it.summary
-            binding.teamSizeTv.text = it.teamSize.toString()
+            binding.teamSizeTv.text = resources.getString(
+                R.string.project_preview_team_size,
+                it.teamSize
+            )
         }
     }
 

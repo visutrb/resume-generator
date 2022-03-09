@@ -3,7 +3,6 @@ package me.visutrb.resumegen.mvp.resumedetails
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import me.visutrb.resumegen.R
@@ -12,9 +11,11 @@ import me.visutrb.resumegen.entity.Education
 import me.visutrb.resumegen.entity.Project
 import me.visutrb.resumegen.entity.Resume
 import me.visutrb.resumegen.entity.WorkExperience
+import me.visutrb.resumegen.mvp.Activity
+import org.koin.android.ext.android.inject
 import java.io.File
 
-class ResumeDetailsActivity : AppCompatActivity() {
+class ResumeDetailsActivity : Activity(), ResumeDetailsPresenter.View {
 
     private lateinit var binding: ActivityResumeDetailsBinding
 
@@ -23,6 +24,8 @@ class ResumeDetailsActivity : AppCompatActivity() {
     private var educations = mutableListOf<Education>()
     private var workExperiences = mutableListOf<WorkExperience>()
     private var projects = mutableListOf<Project>()
+
+    private val presenter: ResumeDetailsPresenter by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +38,9 @@ class ResumeDetailsActivity : AppCompatActivity() {
 
         renderResume()
         renderSkills()
-        renderEducations()
-        renderWorkExperiences()
-        renderProjects()
+
+        presenter.view = this
+        presenter.loadRelatedData(resume)
     }
 
     private fun renderResume() {
@@ -105,6 +108,20 @@ class ResumeDetailsActivity : AppCompatActivity() {
                 }
             view.project = project
         }
+    }
+
+    override fun onRelatedDataLoaded(
+        educations: List<Education>,
+        workExperiences: List<WorkExperience>,
+        projects: List<Project>
+    ) {
+        this.educations = educations.toMutableList()
+        this.workExperiences = workExperiences.toMutableList()
+        this.projects = projects.toMutableList()
+
+        renderEducations()
+        renderWorkExperiences()
+        renderProjects()
     }
 
     companion object {
